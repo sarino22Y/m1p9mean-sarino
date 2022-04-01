@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <th>Numero</th>
+                    <th>Jour</th>
+                    <th>Menu</th>
+                    <th>Action</th>
+                </thead>
+                <tbody *ngFor="let menu of plats">
+                    <td >{{ menu.idPlat }}</td>
+                    <td >{{ menu.name }}</td>
+                    <td >{{ menu.number }}</td>
+                    <td> 
+                        <a href="#" [routerLink]="['/listmenu/', menu.NumeroJour, 'edit']" class="btn btn-primary">Edit</a>
+                        <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer">
+                    </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
