@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/m1p9mean-sarino",
             "outputPath": "dist/m1p9mean-sarino",
             "index": "src/index.html",
             "main": "src/main.ts",
