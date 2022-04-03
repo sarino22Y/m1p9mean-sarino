@@ -6,12 +6,19 @@ import { PlatRoutingModule } from './routes/plat-routing.module';
 import { UserRoutingModule  } from './routes/user-routing.module';
 import { RestaurantRoutingModule  } from './routes/restaurant-routing.module';
 import { AppRoutingModule } from './routes/app-routing.module';
+import { CommandeRoutingModule } from './routes/commande-routing.module';
 
 import { AppComponent } from './app.component';
 import { PlatComponent } from './components/plat/plat.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ErrorComponent } from './components/error/error.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
+import { CommandeComponent } from './components/commande/commande.component';
+import { LivraisonComponent } from './components/livraison/livraison.component';
+import { LivraisonRoutingModule } from './routes/livraison-routing.module';
+import { FooterComponent } from './components/footer/footer.component';
+import { PrivilegeComponent } from './components/privilege/privilege.component';
+import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,14 +26,21 @@ import { RestaurantComponent } from './components/restaurant/restaurant.componen
     PlatComponent,
     HeaderComponent,
     ErrorComponent,
-    RestaurantComponent    
+    RestaurantComponent,
+    CommandeComponent,
+    LivraisonComponent,
+    FooterComponent,
+    PrivilegeComponent    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    PlatRoutingModule,
     UserRoutingModule,
+    PrivilegeRoutingModule,
+    PlatRoutingModule,
     RestaurantRoutingModule,
+    CommandeRoutingModule,
+    LivraisonRoutingModule,
     AppRoutingModule
   ],
   exports:[AppComponent],
