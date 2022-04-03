@@ -1,0 +1,46 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background-image: url('/assets/img/background.jpg');
+        height: 200px;">
+    </div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px; 
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);">
+        <div class="card-body py-5 px-md-5">
+  
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-5">Livraisons</h2>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Livreur</th>
+                                    <th>Commande</th>
+                                    <th>Date de livraison</th>
+                                </thead>
+                                <tbody *ngFor="let livraison of livraisons">
+                                    <td >{{ livraison.idLivraison }}</td>
+                                    <td >{{ livraison.idLivreur }}</td>
+                                    <td >{{ livraison.idCommande }}</td>
+                                    <td >{{ livraison.dateLivraison }}</td>
+                                    <td> 
+                                        <a [routerLink]="['/livraisonliste/', livraison.idLivraison, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                        <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
+                                    </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
