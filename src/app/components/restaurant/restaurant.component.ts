@@ -8,7 +8,6 @@ import { RestaurantService } from 'src/app/services/restaurant-service.service'
   styleUrls: ['./restaurant.component.css']
 })
 export class RestaurantComponent implements OnInit {
-
   restaurants: any;
 
   constructor(private restaurantService:RestaurantService) { }
@@ -27,5 +26,4 @@ export class RestaurantComponent implements OnInit {
       console.log('ITYYYYYYYYYYYYYYYY',this.restaurants);
     });
   }
-
 }
