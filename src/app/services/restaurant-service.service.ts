@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { catchError, Observable } from 'rxjs';
 
-import { catchError, Observable, throwError } from 'rxjs'
-
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlatService {
-
+export class RestaurantService {
   apiLocalUrl: string = environment.apiLocalUrl;
 
   constructor( private http: HttpClient) { }
 
   /**
-   * Retourner la liste de plat.
+   * Retourner la liste de restaurant.
    * @returns HttpClient
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/plats')
+    return this.http.get(this.apiLocalUrl + '/restaurants')
   }
 
   /**
@@ -30,37 +28,37 @@ export class PlatService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/plat/' + id) 
+    return this.http.get(this.apiLocalUrl + '/restaurant/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   /**
-   * Persister un plat.
+   * Persister un restaurant.
    * @param data 
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addplat/', data) ;
+    return this.http.post(this.apiLocalUrl + '/addrestaurant/', data) ;
   }
 
   /**
-   * Mise à jour de plat.
+   * Mise à jour de restaurant.
    * @return HttpClient
    */
-  update(id:number, plat: any) {
-    return this.http.put(this.apiLocalUrl + '/updateplat/' + id, plat);
+  update(id:number, restaurant: any) {
+    return this.http.put(this.apiLocalUrl + '/updaterestaurant/' + id, restaurant);
   }
 
   /**
-   * Supprimer un plat.
+   * Supprimer un restaurant.
    * @param id 
    * @returns 
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/plat/' + id) ;
+    return this.http.delete(this.apiLocalUrl + '/restaurant/' + id) ;
   }
 
   /**

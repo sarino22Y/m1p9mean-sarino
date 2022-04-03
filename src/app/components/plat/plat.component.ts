@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatService } from 'src/app/services/plat-service.service';
 
+
 @Component({
   selector: 'app-plat',
   templateUrl: './plat.component.html',

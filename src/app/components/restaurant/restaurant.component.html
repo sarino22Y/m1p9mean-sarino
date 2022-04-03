@@ -15,23 +15,22 @@
   
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
-                    <h2 class="fw-bold mb-5">Plats</h2>
+                    <h2 class="fw-bold mb-5">Restaurants</h2>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Nombres</th>
+                                    <th>Adresse</th>
                                     <th>Action</th>
                                 </thead>
-                                <tbody *ngFor="let plat of plats">
-                                    <td >{{ plat.idPlat }}</td>
-                                    <td >{{ plat.name }}</td>
-                                    <td >{{ plat.number }}</td>
+                                <tbody *ngFor="let restaurant of restaurants">
+                                    <td >{{ restaurant.idRestaurant }}</td>
+                                    <td >{{ restaurant.name }}</td>
+                                    <td >{{ restaurant.addres }}</td>
                                     <td> 
-                                        <a href="#" [routerLink]="['/platliste/', plat.idPlat, 'edit']" class="btn btn-outline-warning">Commande</a>
-                                        <a routerLink='/platliste' class="btn btn-outline-warning">Edit</a>
+                                        <a [routerLink]="['/restaurantliste/', restaurant.idRestaurant, 'edit']" class="btn btn-outline-warning">Edit</a>
                                         <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
                                     </td>
                                 </tbody>
@@ -44,7 +43,3 @@
     </div>
 </section>
 <!-- Section: Design Block -->
-
-<!-- Debu: Modal pour la mise à jour des plats-->
-
-<!-- Fin: Modal pour la mise à jour des plats-->
