@@ -8,7 +8,6 @@ import { PlatService } from 'src/app/services/plat-service.service';
   styleUrls: ['./plat.component.css']
 })
 export class PlatComponent implements OnInit {
-
   plats: any;
 
   constructor(private platListeService:PlatService) { }
