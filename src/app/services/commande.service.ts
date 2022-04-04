@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CommandeService {
-  apiLocalUrl: string = environment.apiLocalUrl;
+  apiUrl: string = environment.apiUrl;
 
   constructor( private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class CommandeService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/commandes')
+    return this.http.get(this.apiUrl + '/commandes')
   }
 
   /**
@@ -27,7 +27,7 @@ export class CommandeService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/commande/' + id) 
+    return this.http.get(this.apiUrl + '/commande/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
@@ -39,7 +39,7 @@ export class CommandeService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addcommande/', data) ;
+    return this.http.post(this.apiUrl + '/addcommande/', data) ;
   }
 
   /**
@@ -47,7 +47,7 @@ export class CommandeService {
    * @return HttpClient
    */
   update(id:number, commande: any) {
-    return this.http.put(this.apiLocalUrl + '/updatecommande/' + id, commande);
+    return this.http.put(this.apiUrl + '/updatecommande/' + id, commande);
   }
 
   /**
@@ -57,7 +57,7 @@ export class CommandeService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/commande/' + id) ;
+    return this.http.delete(this.apiUrl + '/commande/' + id) ;
   }
 
   /**

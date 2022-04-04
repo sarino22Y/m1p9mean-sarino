@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PrivilegeService {
-  apiLocalUrl: string = environment.apiLocalUrl;
+  apiUrl: string = environment.apiUrl;
 
   constructor( private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class PrivilegeService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/privileges')
+    return this.http.get(this.apiUrl + '/privileges')
   }
 
   /**
@@ -27,7 +27,7 @@ export class PrivilegeService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/privilege/' + id) 
+    return this.http.get(this.apiUrl + '/privilege/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
@@ -39,7 +39,7 @@ export class PrivilegeService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addprivilege/', data) ;
+    return this.http.post(this.apiUrl + '/addprivilege/', data) ;
   }
 
   /**
@@ -47,7 +47,7 @@ export class PrivilegeService {
    * @return HttpClient
    */
   update(id:number, privilege: any) {
-    return this.http.put(this.apiLocalUrl + '/updateprivilege/' + id, privilege);
+    return this.http.put(this.apiUrl + '/updateprivilege/' + id, privilege);
   }
 
   /**
@@ -57,7 +57,7 @@ export class PrivilegeService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/privilege/' + id) ;
+    return this.http.delete(this.apiUrl + '/privilege/' + id) ;
   }
 
   /**

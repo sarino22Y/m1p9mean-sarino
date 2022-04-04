@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LivraisonService {
-  apiLocalUrl: string = environment.apiLocalUrl;
+  apiUrl: string = environment.apiUrl;
 
   constructor( private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class LivraisonService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/livraisons')
+    return this.http.get(this.apiUrl + '/livraisons')
   }
 
   /**
@@ -27,7 +27,7 @@ export class LivraisonService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/livraison/' + id) 
+    return this.http.get(this.apiUrl + '/livraison/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
@@ -39,7 +39,7 @@ export class LivraisonService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addlivraison/', data) ;
+    return this.http.post(this.apiUrl + '/addlivraison/', data) ;
   }
 
   /**
@@ -47,7 +47,7 @@ export class LivraisonService {
    * @return HttpClient
    */
   update(id:number, livraison: any) {
-    return this.http.put(this.apiLocalUrl + '/updatelivraison/' + id, livraison);
+    return this.http.put(this.apiUrl + '/updatelivraison/' + id, livraison);
   }
 
   /**
@@ -57,7 +57,7 @@ export class LivraisonService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/livraison/' + id) ;
+    return this.http.delete(this.apiUrl + '/livraison/' + id) ;
   }
 
   /**

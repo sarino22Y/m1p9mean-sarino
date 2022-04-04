@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RestaurantService {
-  apiLocalUrl: string = environment.apiLocalUrl;
+  apiUrl: string = environment.apiUrl;
 
   constructor( private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class RestaurantService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/restaurants')
+    return this.http.get(this.apiUrl + '/restaurants')
   }
 
   /**
@@ -28,7 +28,7 @@ export class RestaurantService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/restaurant/' + id) 
+    return this.http.get(this.apiUrl + '/restaurant/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
@@ -40,7 +40,7 @@ export class RestaurantService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addrestaurant/', data) ;
+    return this.http.post(this.apiUrl + '/addrestaurant/', data) ;
   }
 
   /**
@@ -48,7 +48,7 @@ export class RestaurantService {
    * @return HttpClient
    */
   update(id:number, restaurant: any) {
-    return this.http.put(this.apiLocalUrl + '/updaterestaurant/' + id, restaurant);
+    return this.http.put(this.apiUrl + '/updaterestaurant/' + id, restaurant);
   }
 
   /**
@@ -58,7 +58,7 @@ export class RestaurantService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/restaurant/' + id) ;
+    return this.http.delete(this.apiUrl + '/restaurant/' + id) ;
   }
 
   /**

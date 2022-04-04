@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https:%todo%/api",  
-  apiLocalUrl : "http://localhost:3000/api"
+  apiUrl: "https://m1p9mean-sarino-api.herokuapp.com/api/api"
 };

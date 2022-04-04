@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PlatService {
 
-  apiLocalUrl: string = environment.apiLocalUrl;
+  apiUrl: string = environment.apiUrl;
 
   constructor( private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class PlatService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/plats')
+    return this.http.get(this.apiUrl + '/plats')
   }
 
   /**
@@ -30,7 +30,7 @@ export class PlatService {
    */
   getOne(id: number): Observable<any>
   {
-    return this.http.get(this.apiLocalUrl + '/plat/' + id) 
+    return this.http.get(this.apiUrl + '/plat/' + id) 
     .pipe(
       catchError(this.errorHandler)
     )
@@ -42,7 +42,7 @@ export class PlatService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiLocalUrl + '/addplat/', data) ;
+    return this.http.post(this.apiUrl + '/addplat/', data) ;
   }
 
   /**
@@ -50,7 +50,7 @@ export class PlatService {
    * @return HttpClient
    */
   update(id:number, plat: any) {
-    return this.http.put(this.apiLocalUrl + '/updateplat/' + id, plat);
+    return this.http.put(this.apiUrl + '/updateplat/' + id, plat);
   }
 
   /**
@@ -60,7 +60,7 @@ export class PlatService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiLocalUrl + '/plat/' + id) ;
+    return this.http.delete(this.apiUrl + '/plat/' + id) ;
   }
 
   /**
