@@ -7,6 +7,7 @@ import { UserRoutingModule  } from './routes/user-routing.module';
 import { RestaurantRoutingModule  } from './routes/restaurant-routing.module';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { CommandeRoutingModule } from './routes/commande-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PlatComponent } from './components/plat/plat.component';
@@ -19,6 +20,8 @@ import { LivraisonRoutingModule } from './routes/livraison-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivilegeComponent } from './components/privilege/privilege.component';
 import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +33,13 @@ import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
     CommandeComponent,
     LivraisonComponent,
     FooterComponent,
-    PrivilegeComponent    
+    PrivilegeComponent,
+    LoginComponent,
+    RegisterComponent    
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     UserRoutingModule,
     PrivilegeRoutingModule,
@@ -41,7 +47,7 @@ import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
     RestaurantRoutingModule,
     CommandeRoutingModule,
     LivraisonRoutingModule,
-    AppRoutingModule
+    AppRoutingModule    
   ],
   exports:[AppComponent],
   providers: [],
