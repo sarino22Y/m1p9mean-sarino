@@ -34,19 +34,23 @@ export class RegisterComponent implements OnInit {
    * @returns 
    */
   register(){
-    if (!this.registerForm.valid || this.registerForm.controls['password'].value != this.registerForm.controls['confirmPassword'].value) {
-      if (!this.registerForm.controls['email'].valid) {
-        console.log('Email invalide');
-        return;
-      }
-      
-      console.log('Forme invalide');
-      return;
-    }
     if (!this.registerForm.controls['email'].valid) {
       console.log('Email invalide');
       return;
     }
+    if (this.registerForm.controls['password'].value != this.registerForm.controls['confirmPassword'].value) {
+      console.log('Les mots de passe ne correspondent pas.');
+      return;
+    }
+    if (!this.registerForm.valid) {
+      if (!this.registerForm.controls['email'].valid) {
+        console.log('Email invalide');
+        return;
+      }
+      console.log('Forme invalide');
+      return;
+    }
+
     console.log(JSON.stringify(this.registerForm.value));
     
   }
