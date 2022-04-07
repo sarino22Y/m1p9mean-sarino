@@ -51,7 +51,7 @@
                         </div>
 
                         <!-- Submit button -->
-                        <button (click)="register()" type="button" class="btn btn-primary btn-block mb-4">
+                        <button (click)="register()" [disabled]="registerForm.invalid" type="button" class="btn btn-primary btn-block mb-4">
                             Enregistrer
                         </button>
                     </form>
