@@ -74,7 +74,6 @@ export class RestaurantService {
     } else {
       errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
     }
-
     return errorMessage;
   }
 }
