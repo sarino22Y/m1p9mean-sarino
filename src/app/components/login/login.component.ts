@@ -54,27 +54,21 @@ export class LoginComponent implements OnInit {
    */
   login(){
     if (!this.loginForm.valid) {
-      console.log("Form invalide");
+      alert("Form invalide");
       return;      
     }
-    console.log(JSON.stringify(this.loginForm.value));
-    this.userService.login(JSON.stringify(this.loginForm.value))
+    this.model = this.loginForm.value;
+    
+    this.userService.login(this.model)
     .subscribe({
       next: ( data:any ) => {
-        console.log("DATATATTT", data.status); 
         this.responseData = data;
-        localStorage.setItem('token',this.responseData.jwtToken);
-
-        if (data.status=='error') {
-          alert("Nom d'utilisateur ou mots de passe incorrecte.")
-          this.route.navigate(['/user/login'])
-        } else {
-          this.route.navigate(['/platliste']);
-        }
-        // data.status=='error' ? this.route.navigate(['/user/login']) : this.route.navigate(['/']);
+        // console.log("TOKKKKENNN", this.responseData.token.split(' ')[1]); 
+        localStorage.setItem('token',this.responseData.token.split(' ')[1]);
+        this.route.navigate(['']);
       },
       error: (e) => {
-        console.error("ERERERERERE",e);
+        console.error("EREURRR",e);
       }
     })
   }
