@@ -78,8 +78,4 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
-  logout(){
-    localStorage.clear();
-  }
 }
