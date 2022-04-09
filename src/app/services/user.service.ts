@@ -13,13 +13,23 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }),
+    withCredentials: true
   }
 
   constructor(private http: HttpClient) { }
    
+  // Methode pour s'enregistrer.
   register(data: IUsers){
     return this.http.post(this.apiUrl + '/register', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  // Methode pour se connecter.
+  login(data: any){
+    return this.http.post(this.apiUrl + '/login', data, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

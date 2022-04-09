@@ -3,7 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { ErrorComponent } from '../components/error/error.component';
 
 const routes: Routes = [
-    {path: '**', component: ErrorComponent}
+    {path: '**', component: ErrorComponent},
 ]
 
 @NgModule({

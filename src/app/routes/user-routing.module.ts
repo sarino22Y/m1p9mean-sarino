@@ -8,7 +8,8 @@ import { PlatComponent } from '../components/plat/plat.component';
 const routes: Routes = [
     {path: 'user/register', component: RegisterComponent},
     {path: 'user/login', component: LoginComponent},
-    {path: 'user', component: PlatComponent}
+    {path: 'user', component: PlatComponent},   
+    {path: '', component: LoginComponent}
 ]
 
 @NgModule({
