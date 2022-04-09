@@ -25,6 +25,7 @@ import { HeaderloggedinComponent } from './components/shared/headers/headerlogge
 import { HeadernotloggedinComponent } from './components/shared/headers/headernotloggedin/headernotloggedin.component';
 import { AccueilComponent } from './components/shared/accueil/accueil.component';
 import { AccueilRoutingModule } from './routes/accueil-routing.module';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AccueilRoutingModule } from './routes/accueil-routing.module';
     PrivilegeComponent,
     LoginComponent,
     RegisterComponent,
-    AccueilComponent
+    AccueilComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
