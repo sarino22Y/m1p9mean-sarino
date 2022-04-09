@@ -15,19 +15,23 @@
   
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
-                    <h2 class="fw-bold mb-5">Privileges</h2>
+                    <h2 class="fw-bold mb-5">Plats</h2>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Nombres</th>
+                                    <th>Action</th>
                                 </thead>
-                                <tbody *ngFor="let privilege of privileges">
-                                    <td >{{ privilege.idPrivilege }}</td>
-                                    <td >{{ privilege.name }}</td>
+                                <tbody *ngFor="let plat of plats">
+                                    <td >{{ plat.idPlat }}</td>
+                                    <td >{{ plat.name }}</td>
+                                    <td >{{ plat.number }}</td>
                                     <td> 
-                                        <a href="#" [routerLink]="['/privilegeliste/', privilege.idPrivilege, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                        <a href="#" [routerLink]="['/platliste/', plat.idPlat, 'edit']" class="btn btn-outline-warning">Commande</a>
+                                        <a routerLink='/platliste' class="btn btn-outline-warning">Edit</a>
                                         <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
                                     </td>
                                 </tbody>
@@ -41,6 +45,6 @@
 </section>
 <!-- Section: Design Block -->
 
-<!-- Debu: Modal pour la mise à jour des privileges-->
+<!-- Debu: Modal pour la mise à jour des plats-->
 
-<!-- Fin: Modal pour la mise à jour des privileges-->
+<!-- Fin: Modal pour la mise à jour des plats-->

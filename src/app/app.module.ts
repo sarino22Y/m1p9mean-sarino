@@ -11,7 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PlatComponent } from './components/plat/plat.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ErrorComponent } from './components/error/error.component';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
 import { CommandeComponent } from './components/commande/commande.component';
@@ -22,23 +21,31 @@ import { PrivilegeComponent } from './components/privilege/privilege.component';
 import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HeaderloggedinComponent } from './components/shared/headers/headerloggedin/headerloggedin.component';
+import { HeadernotloggedinComponent } from './components/shared/headers/headernotloggedin/headernotloggedin.component';
+import { AccueilComponent } from './components/shared/accueil/accueil.component';
+import { AccueilRoutingModule } from './routes/accueil-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
+    HeaderloggedinComponent,
+    HeadernotloggedinComponent,
+    FooterComponent,
     PlatComponent,
-    HeaderComponent,
     ErrorComponent,
     RestaurantComponent,
     CommandeComponent,
     LivraisonComponent,
-    FooterComponent,
     PrivilegeComponent,
     LoginComponent,
-    RegisterComponent    
+    RegisterComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
+    AccueilRoutingModule,   
     ReactiveFormsModule,
     HttpClientModule,
     UserRoutingModule,
@@ -47,7 +54,7 @@ import { RegisterComponent } from './components/register/register.component';
     RestaurantRoutingModule,
     CommandeRoutingModule,
     LivraisonRoutingModule,
-    AppRoutingModule    
+    AppRoutingModule
   ],
   exports:[AppComponent],
   providers: [],

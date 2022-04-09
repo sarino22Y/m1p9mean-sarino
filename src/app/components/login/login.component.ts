@@ -75,8 +75,11 @@ export class LoginComponent implements OnInit {
       },
       error: (e) => {
         console.error("ERERERERERE",e);
-        this.route.navigate(['/user/login']);
       }
     })
+  }
+
+  logout(){
+    localStorage.clear();
   }
 }

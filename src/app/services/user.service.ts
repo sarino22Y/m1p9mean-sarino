@@ -19,7 +19,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
    
-  // Methode pour s'enregistrer.
+  /**
+   * Methode pour s'enregistrer.
+   * @param data 
+   * @returns 
+   */
   register(data: IUsers){
     return this.http.post(this.apiUrl + '/register', data, this.httpOptions)
     .pipe(
@@ -27,12 +31,37 @@ export class UserService {
     )
   }
 
-  // Methode pour se connecter.
+  /**
+   * Methode pour se connecter.
+   * @param data 
+   * @returns 
+   */
   login(data: any){
     return this.http.post(this.apiUrl + '/login', data, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
+  }
+
+  /**
+   * Utilisateur connecté.
+   * @returns token
+   */
+  isLoggedIn(){
+    return localStorage.getItem('token') != null;
+  }
+
+  /**
+   * Accès aux données.
+   * 
+   */
+  haveAcces(){
+    var loginToken = localStorage.getItem('token')||'';
+    var extractToken = loginToken.split('.')[1];
+    var atobData = atob(extractToken);
+    var finaldata = JSON.parse(atobData);
+    console.log(finaldata);
+    
   }
 
   /**
