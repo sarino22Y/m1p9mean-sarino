@@ -26,7 +26,7 @@ export class UserService {
    * @returns 
    */
   register(data: IUsers){
-    return this.http.post(this.apiUrl + '/register', data, this.httpOptions)
+    return this.http.post(this.apiUrl + '/register-client', data, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
@@ -38,7 +38,7 @@ export class UserService {
    * @returns 
    */
   login(data: any){
-    return this.http.post(this.apiUrl + '/login', data, this.httpOptions)
+    return this.http.post(this.apiUrl + '/users/login-client', data, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
@@ -70,12 +70,37 @@ export class UserService {
     var atobData = atob(extractToken);
     var finaldata = JSON.parse(atobData);
     
-    if (finaldata.username == 'sarino') {
+    if (finaldata.role == 'ekaly') {
       return true;
     }
     alert("Vous n'avez pas l'autorisation de consulter cette page.")
     return false;    
   }
+
+
+  /**
+   * retourner le nom d'utilisateur connecté.
+   * 
+   */
+  nameOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.username;
+    }
+  }
+
+
+  /**
+   * Retourner la liste de restaurant.
+   * @returns HttpClient
+   */
+   getAll(): Observable<any>
+   {
+     return this.http.get(this.apiUrl + '/users')
+   }
 
   /**
    * Capture d'erreur.

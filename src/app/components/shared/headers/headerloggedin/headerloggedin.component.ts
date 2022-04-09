@@ -10,15 +10,25 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderloggedinComponent implements OnInit {
 
+  name:any;
   constructor(
     private userService: UserService ,
     private route: Router
   ) { }
 
   ngOnInit(): void {
+    
+  }
+
+  nameUser():any{
+    return this.userService.nameOfUserConnected();
   }
 
   loggedIn(){
     return localStorage.getItem('token');
+  }
+
+  logout(){
+    this.userService.logout();
   }
 }

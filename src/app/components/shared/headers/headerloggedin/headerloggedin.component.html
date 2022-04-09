@@ -32,11 +32,15 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/privilegeliste">Privilèges</a>
                 </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/users">Utilisateurs</a>
+                </li>
             </ul>
             <div class="d-flex">
                 <span class="btn btn-light ms-3" *ngIf="!loggedIn()"><a class="nav-link" routerLink="/user/login">Se connecter</a></span>
                 <span class="btn btn-light ms-3"  *ngIf="!loggedIn()"><a class="nav-link" routerLink="/user/register">S'inscrire</a></span>
-                <span class="btn btn-light ms-3"  *ngIf="loggedIn()"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
+                <h5 *ngIf="loggedIn()"> <p></p> Bonjour <strong>{{nameUser()}}</strong></h5>
+                <span class="btn btn-light ms-3" (click)="logout()" *ngIf="loggedIn()"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
             </div>
         </div>
     </div>
