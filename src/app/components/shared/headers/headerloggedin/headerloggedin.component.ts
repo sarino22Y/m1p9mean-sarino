@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-headerloggedin',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderloggedinComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userService: UserService ,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  loggedIn(){
+    return localStorage.getItem('token');
+  }
 }

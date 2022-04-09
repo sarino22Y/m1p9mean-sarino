@@ -34,7 +34,9 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <span class="btn btn-light ms-3"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
+                <span class="btn btn-light ms-3" *ngIf="!loggedIn()"><a class="nav-link" routerLink="/user/login">Se connecter</a></span>
+                <span class="btn btn-light ms-3"  *ngIf="!loggedIn()"><a class="nav-link" routerLink="/user/register">S'inscrire</a></span>
+                <span class="btn btn-light ms-3"  *ngIf="loggedIn()"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
             </div>
         </div>
     </div>
