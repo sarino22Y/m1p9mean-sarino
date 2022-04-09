@@ -3,10 +3,11 @@ import { Routes, RouterModule} from '@angular/router';
 
 import { RestaurantComponent } from '../components/restaurant/restaurant.component';
 import { AuthGuard } from '../shared/auth/auth.guard';
+import { RoleGuard } from '../shared/auth/role.guard';
 
 const routes: Routes = [
-    {path: 'restaurantliste', component: RestaurantComponent,canActivate:[AuthGuard]},
-    {path: 'restaurantliste/:restaurantId/edit', component: RestaurantComponent}
+    {path: 'restaurantliste/:restaurantId/edit', component: RestaurantComponent,canActivate:[RoleGuard]},
+    {path: 'restaurantliste', component: RestaurantComponent,canActivate:[RoleGuard]}
 ]
 
 @NgModule({

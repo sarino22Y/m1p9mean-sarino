@@ -9,6 +9,7 @@ import { IUsers } from '../models/iusers';
   providedIn: 'root'
 })
 export class UserService {
+  [x: string]: any;
   apiUrl: string = environment.apiUrl;
   httpOptions = {
     headers: new HttpHeaders({
@@ -44,6 +45,14 @@ export class UserService {
   }
 
   /**
+   * logout.
+   */  
+  logout(){
+    localStorage.clear();
+    localStorage.removeItem("token");
+  }
+
+  /**
    * Utilisateur connecté.
    * @returns token
    */
@@ -60,8 +69,12 @@ export class UserService {
     var extractToken = loginToken.split('.')[1];
     var atobData = atob(extractToken);
     var finaldata = JSON.parse(atobData);
-    console.log(finaldata);
     
+    if (finaldata.username == 'sarino') {
+      return true;
+    }
+    alert("Vous n'avez pas l'autorisation de consulter cette page.")
+    return false;    
   }
 
   /**

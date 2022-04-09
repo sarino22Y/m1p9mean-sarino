@@ -3,10 +3,11 @@ import { Routes, RouterModule} from '@angular/router';
 
 import { PrivilegeComponent } from '../components/privilege/privilege.component';
 import { AuthGuard } from '../shared/auth/auth.guard';
+import { RoleGuard } from '../shared/auth/role.guard';
 
 const routes: Routes = [
-    {path: 'privilegeliste', component: PrivilegeComponent,canActivate:[AuthGuard]},
-    {path: 'privilegeliste/:privilegeId/edit', component: PrivilegeComponent}
+    {path: 'privilegeliste', component: PrivilegeComponent,canActivate:[RoleGuard]},
+    {path: 'privilegeliste/:privilegeId/edit', component: PrivilegeComponent,canActivate:[RoleGuard]}
 ]
 
 @NgModule({
