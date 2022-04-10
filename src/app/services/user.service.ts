@@ -9,7 +9,6 @@ import { IUsers } from '../models/iusers';
   providedIn: 'root'
 })
 export class UserService {
-  [x: string]: any;
   apiUrl: string = environment.apiUrl;
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,7 +20,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
    
   /**
-   * Methode pour s'enregistrer.
+   * Methode pour s'enregistrer en tant que client.
    * @param data 
    * @returns 
    */
@@ -33,14 +32,86 @@ export class UserService {
   }
 
   /**
-   * Methode pour se connecter.
+   * Methode pour s'enregistrer en tant que restaurant.
+   * @param data 
+   * @returns 
+   */
+   registerRestaurant(data: IUsers){
+    return this.http.post(this.apiUrl + '/register-restaurant', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  /**
+   * Methode pour s'enregistrer en tant que livreur.
+   * @param data 
+   * @returns 
+   */
+   registerDeliverer(data: IUsers){
+    return this.http.post(this.apiUrl + '/register-deliverer', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  /**
+   * Methode pour s'enregistrer en tant que ekaly.
+   * @param data 
+   * @returns 
+   */
+   registerEkaly(data: IUsers){
+    return this.http.post(this.apiUrl + '/register-ekaly', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  /**
+   * Methode pour se connecter en tant que client.
    * @param data 
    * @returns 
    */
   login(data: any){
     return this.http.post(this.apiUrl + '/users/login-client', data, this.httpOptions)
     .pipe(
-      catchError(this.errorHandler)
+      catchError(this.errorHandlerLogin)
+    )
+  }
+
+  /**
+   * Methode pour se connecter en tant que ekaly.
+   * @param data 
+   * @returns 
+   */
+   loginRestaurant(data: any){
+    return this.http.post(this.apiUrl + '/users/login-restaurant', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandlerLogin)
+    )
+  }
+
+  /**
+   * Methode pour se connecter en tant que livreur.
+   * @param data 
+   * @returns 
+   */
+   loginDeliverer(data: any){
+    return this.http.post(this.apiUrl + '/users/login-deliverer', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandlerLogin)
+    )
+  }
+
+  /**
+   * Methode pour se connecter en tant que ekaly.
+   * @param data 
+   * @returns 
+   */
+   loginEkaly(data: any){
+    return this.http.post(this.apiUrl + '/users/login-ekaly', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandlerLogin)
     )
   }
 
@@ -102,12 +173,13 @@ export class UserService {
      return this.http.get(this.apiUrl + '/users')
    }
 
+  
   /**
    * Capture d'erreur.
    * @param error 
    * @returns error
    */
-   errorHandler(error: any)
+  errorHandler(error: any)
   {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -115,6 +187,23 @@ export class UserService {
     } else {
       errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
     }
+    return errorMessage;
+   }
+
+  /**
+   * Capture d'erreur login.
+   * @param error 
+   * @returns error
+   */
+   errorHandlerLogin(error: any)
+  {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
+    }
+    alert("Veiullez vous rendre sur le login correspondant à votre compte.")
     return errorMessage;
    }
 }
