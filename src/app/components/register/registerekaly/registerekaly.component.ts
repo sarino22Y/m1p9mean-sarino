@@ -6,11 +6,11 @@ import { UserService } from 'src/app/services/user.service';
 import { matchingPasswordsValidator } from 'src/app/shared/validators/password-match';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registerekaly',
+  templateUrl: './registerekaly.component.html',
+  styleUrls: ['./registerekaly.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterekalyComponent implements OnInit{
 
   registerForm!: FormGroup;
   model!: IUsers;
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.title = 'Créer un compte client';
+    this.title = 'Créer un compte en tant que responsable de Ekaly';
     this.createForm()
   }
 
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
 
     this.model = this.registerForm.value;
-    this.userService.register(this.model)
+    this.userService.registerEkaly(this.model)
     .subscribe({
       next: ( data ) => {
         console.log(data); 
