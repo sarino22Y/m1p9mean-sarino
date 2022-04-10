@@ -9,16 +9,16 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/">Accueil</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayRestaurant" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/restaurantliste">Restaurants</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayCommande" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/commandeliste">Commande</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayLivraison"class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/livraisonliste">Livraison</a>
                 </li>
-                <li class="nav-item dropdown" routerLinkActive="active">
+                <!-- <li class="nav-item dropdown" routerLinkActive="active">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Utilisateurs
                     </a>
@@ -28,11 +28,11 @@
                         <li><a class="dropdown-item" routerLink="/user/client">Clients</a></li>
                         <li><a class="dropdown-item" routerLink="/user/livreur">Livreurs</a></li>
                     </ul>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
+                </li> -->
+                <li *ngIf="displayUser" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/privilegeliste">Privilèges</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayUser" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/users">Utilisateurs</a>
                 </li>
             </ul>

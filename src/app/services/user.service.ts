@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IUsers } from '../models/iusers';
@@ -15,6 +15,13 @@ export class UserService {
       'Content-Type': 'application/json'
     }),
     withCredentials: true
+  }
+
+  tokenResponse: any;
+
+  private updateMenu = new Subject<void>();
+  get updateTheMenu(){
+    return this.updateMenu;
   }
 
   constructor(private http: HttpClient) { }
@@ -132,6 +139,43 @@ export class UserService {
   }
 
   /**
+   * Obtenir le Token.
+   * 
+   * @returns 
+   */
+  getToken():any{
+    return localStorage.getItem('token') != '';
+  }
+
+  /**
+   * Obtenir le Token.
+   * 
+   * @returns 
+   */
+  getRoleByToken(token:any){  
+      token = localStorage.getItem('token')||'';
+      var extractToken = token.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.role;
+   
+  }
+
+  /**
+   * retourner le nom d'utilisateur connecté.
+   * 
+   */
+   nameOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.username;
+    }
+  }
+
+  /**
    * Accès aux données.
    * 
    */
@@ -147,22 +191,6 @@ export class UserService {
     alert("Vous n'avez pas l'autorisation de consulter cette page.")
     return false;    
   }
-
-
-  /**
-   * retourner le nom d'utilisateur connecté.
-   * 
-   */
-  nameOfUserConnected():any{
-    if (localStorage.getItem('token')) {
-      var loginToken = localStorage.getItem('token')||'';
-      var extractToken = loginToken.split('.')[1];
-      var atobData = atob(extractToken);
-      var finaldata = JSON.parse(atobData);
-      return finaldata.username;
-    }
-  }
-
 
   /**
    * Retourner la liste de restaurant.

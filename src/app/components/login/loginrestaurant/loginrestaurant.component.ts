@@ -69,6 +69,7 @@ export class LoginrestaurantComponent implements OnInit {
         this.responseData = data;
         // console.log("TOKKKKENNN", this.responseData.token.split(' ')[1]); 
         localStorage.setItem('token',this.responseData.token.split(' ')[1]);
+        this.userService.updateTheMenu.next();
         this.route.navigate(['']);
       },
       error: (e) => {
