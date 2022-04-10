@@ -5,11 +5,11 @@ import { IUsers } from 'src/app/models/iusers';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-logindeliverer',
+  templateUrl: './logindeliverer.component.html',
+  styleUrls: ['./logindeliverer.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LogindelivererComponent implements OnInit {
 
   loginForm!: FormGroup;
   model!: IUsers;
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.title = "Se connecter en tant que client."
+    this.title = "Se connecter en tant que Livreur."
     this.createForm();
   }
 
@@ -58,8 +58,10 @@ export class LoginComponent implements OnInit {
       return;      
     }
     this.model = this.loginForm.value;
+
     
-    this.userService.login(this.model)
+    
+    this.userService.loginDeliverer(this.model)
     .subscribe({
       next: ( data:any ) => {
         this.responseData = data;
@@ -72,4 +74,5 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
 }
