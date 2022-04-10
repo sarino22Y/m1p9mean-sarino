@@ -32,6 +32,10 @@ import { LogindelivererComponent } from './components/login/logindeliverer/login
 import { RegisterrestaurantComponent } from './components/register/registerrestaurant/registerrestaurant.component';
 import { RegisterekalyComponent } from './components/register/registerekaly/registerekaly.component';
 import { RegisterdelivererComponent } from './components/register/registerdeliverer/registerdeliverer.component';
+import { ClientdashboardComponent } from './components/dashboard/clientdashboard/clientdashboard.component';
+import { RestaurantdashboardComponent } from './components/dashboard/restaurantdashboard/restaurantdashboard.component';
+import { DelivererdashboardComponent } from './components/dashboard/delivererdashboard/delivererdashboard.component';
+import { DashboardRoutingModule } from './routes/dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { RegisterdelivererComponent } from './components/register/registerdelive
     LogindelivererComponent,
     RegisterrestaurantComponent,
     RegisterekalyComponent,
-    RegisterdelivererComponent
+    RegisterdelivererComponent,
+    ClientdashboardComponent,
+    RestaurantdashboardComponent,
+    DelivererdashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,7 @@ import { RegisterdelivererComponent } from './components/register/registerdelive
     RestaurantRoutingModule,
     CommandeRoutingModule,
     LivraisonRoutingModule,
+    DashboardRoutingModule,
     AppRoutingModule
   ],
   exports:[AppComponent],
