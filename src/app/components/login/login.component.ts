@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   model!: IUsers;
   title!: string;
+  information!: string;
   responseData: any;
   
   constructor(
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = "Se connecter en tant que client."
+    this.information = "Cliquer le bouton 'Se connecter' si vous n'êtes pas un Client."
     this.createForm();
   }
 
