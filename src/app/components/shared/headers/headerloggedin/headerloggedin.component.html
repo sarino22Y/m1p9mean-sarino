@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container">
-        <a class="navbar-brand" routerLink="/"><img src="" alt="Ekaly" class="img-fluid" /></a>
+        <a class="navbar-brand" routerLink="/"><img src="" alt="E-kaly" class="img-fluid" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,13 +9,25 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/">Accueil</a>
                 </li>
-                <li *ngIf="displayRestaurant" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayDashboardRestaurant && loggedIn()" class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/restaurant/dashboard">Tableau de bord Restaurant</a>
+                </li>
+                <li *ngIf="displayDashboardClient && loggedIn()" class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/client/dashboard">Tableau de bord Client</a>
+                </li>
+                <li *ngIf="displayDashboardDeliverer && loggedIn()" class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/deliverer/dashboard">Tableau de bord Livreur</a>
+                </li>
+                <li *ngIf="displayPlat && loggedIn()" class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/platliste">Plats</a>
+                </li>
+                <li *ngIf="displayRestaurant && loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/restaurantliste">Restaurants</a>
                 </li>
-                <li *ngIf="displayCommande" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayCommande && loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/commandeliste">Commande</a>
                 </li>
-                <li *ngIf="displayLivraison"class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayLivraison && loggedIn()"class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/livraisonliste">Livraison</a>
                 </li>
                 <!-- <li class="nav-item dropdown" routerLinkActive="active">
@@ -29,10 +41,10 @@
                         <li><a class="dropdown-item" routerLink="/user/livreur">Livreurs</a></li>
                     </ul>
                 </li> -->
-                <li *ngIf="displayUser" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayUser && loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/privilegeliste">Privilèges</a>
                 </li>
-                <li *ngIf="displayUser" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayUser && loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/users">Utilisateurs</a>
                 </li>
             </ul>
@@ -67,7 +79,7 @@
             <a class="nav-link" routerLink="/user/loginekaly" (click)="hideLoginModal()">Responsable de Ekaly </a>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeLoginModal()" >Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeLoginModal()">Annuler</button>
         </div>
       </div>
     </div>
@@ -95,7 +107,7 @@
             <a class="nav-link" routerLink="/user/registerekaly" (click)="hideRegisterModal()">Responsable de Ekaly </a>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeRegisterModal()" >Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeRegisterModal()">Annuler</button>
         </div>
       </div>
     </div>
