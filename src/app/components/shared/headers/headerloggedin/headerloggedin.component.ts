@@ -16,7 +16,12 @@ export class HeaderloggedinComponent implements OnInit {
   loginModal: any;
   registerModal: any;
 
-  displayMenu: any;
+  displayDashboardRestaurant: any;
+  displayDashboardClient: any;
+  displayDashboardDeliverer: any;
+  displayDashboardEkaly: any;
+
+  displayPlat: any;
   displayRestaurant: any;
   displayCommande: any;
   displayLivraison: any;
@@ -78,10 +83,17 @@ export class HeaderloggedinComponent implements OnInit {
   displayMenuCurrentUser(){
     if (this.userService.getToken() != '') {
       this.curentRole = this.userService.getRoleByToken(this.userService.getToken());
+      // Ekaly seulement
       this.displayUser = this.curentRole == 'ekaly';
+      this.displayPlat = this.curentRole == 'ekaly';
       this.displayRestaurant = (this.curentRole == 'ekaly');
-      this.displayCommande = (this.curentRole == 'ekaly' || this.curentRole == 'deliverer');
       this.displayLivraison = (this.curentRole == 'ekaly');
+      this.displayCommande = (this.curentRole == 'ekaly' || this.curentRole == 'deliverer');
+
+      // Tableau de bord.
+      this.displayDashboardRestaurant = this.curentRole == 'restaurant';
+      this.displayDashboardClient = this.curentRole == 'client';
+      this.displayDashboardDeliverer = this.curentRole == 'deliverer';
     }
   }
 
