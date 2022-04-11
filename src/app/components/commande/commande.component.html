@@ -20,19 +20,21 @@
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
-                                    <th>ID</th>
-                                    <th>IdPlat</th>
-                                    <th>idClient</th>
-                                    <th>nombre</th>
-                                    <th>date</th>
-                                    <th>dateLivraison</th>
+                                    <th>Date de commande</th>
+                                    <th>Nom du plat</th>
+                                    <th>Nom du client</th>
+                                    <th>Adresse du client</th>
+                                    <th>Email</th>
+                                    <th>Nombre commandés</th>
+                                    <th>Date de livraison</th>
                                 </thead>
                                 <tbody *ngFor="let commande of commandes">
-                                    <td >{{ commande.idCommande }}</td>
-                                    <td >{{ commande.idPlat }}</td>
-                                    <td >{{ commande.idClient }}</td>
-                                    <td >{{ commande.nombre }}</td>
                                     <td >{{ commande.date }}</td>
+                                    <td >{{ commande.namePlat }}</td>
+                                    <td >{{ commande.nameClient }}</td>
+                                    <td >{{ commande.adressClient }}</td>
+                                    <td >{{ commande.mailClient }}</td>
+                                    <td >{{ commande.nombre }}</td>
                                     <td >{{ commande.dateLivraison }}</td>
                                     <td> 
                                         <a [routerLink]="['/commandeliste/', commande.idCommande, 'edit']" class="btn btn-outline-warning">Edit</a>
