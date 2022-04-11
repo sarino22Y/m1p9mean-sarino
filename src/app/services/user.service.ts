@@ -158,8 +158,20 @@ export class UserService {
       var atobData = atob(extractToken);
       var finaldata = JSON.parse(atobData);
       return finaldata.role;
-   
   }
+
+   /**
+   * Obtenir un user par son id.
+   * @param id 
+   * @returns HttpClient
+   */
+    getUserById(id: number): Observable<any>
+    {
+      return this.http.get(this.apiUrl + '/users/' + id) 
+      .pipe(
+        catchError(this.errorHandler)
+      )
+    }
 
   /**
    * retourner le nom d'utilisateur connecté.
@@ -172,6 +184,20 @@ export class UserService {
       var atobData = atob(extractToken);
       var finaldata = JSON.parse(atobData);
       return finaldata.username;
+    }
+  }
+
+  /**
+   * retourner l'id de l'utilisateur connecté.
+   * 
+   */
+   idOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.user_id;
     }
   }
 
