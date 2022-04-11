@@ -63,14 +63,11 @@ export class CommandeComponent implements OnInit {
     return this.userService.idOfUserConnected();
   }
 
-  infoUser() {
-    console.log('IDDusereser',this.idUser());
-    
+  infoUser() {    
     return this.userService.getUserById(this.idUser()).subscribe( res => {
       this.nameClientC =  res[0].name;
       this.adressClientC =  res[0].adress;
       this.mailClientC =  res[0].email;
-      console.log('ITYYRESESESE', res[0].email);
     })
   }
 
@@ -81,7 +78,6 @@ export class CommandeComponent implements OnInit {
   {
     await this.commandeService.getAll().subscribe( res => {
       this.commandes = res['commandes'];
-      console.log('ITYYYYYYYYYYYYYYYY',this.commandes);
     });
   }
 

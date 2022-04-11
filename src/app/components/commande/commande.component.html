@@ -52,10 +52,10 @@
 <!-- Section: Design Block -->
 
 <form [formGroup]="commandeForm">
-    <input formControlName="namePlat" type="text">
-    <input formControlName="nombre" type="number" min="1">
-    <input formControlName="dateLivraison" type="date">
-    <button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button>
+    <input formControlName="namePlat" type="text" class="form-control">
+    <input formControlName="nombre" type="number" min="1" class="form-control">
+    <input formControlName="dateLivraison" type="date" class="form-control">
 </form>
+<button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button>
 
 <br><br>

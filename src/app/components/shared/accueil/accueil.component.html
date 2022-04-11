@@ -62,11 +62,11 @@
             </div>
             <div class="modal-body">
                 <label for="nombre">Nombre à livrer</label>
-                <input formControlName="nombre" min="1" maxtype="number" name="nombre">
+                <input formControlName="nombre" min="1" type="number" name="nombre">
             </div>
             <div class="modal-body">
                 <label for="dateLivraison">Date de livraison</label>
-                <input formControlName="dateLivraison" type="date" name="dateLivraison">
+                <input formControlName="dateLivraison" type="datetime-local" name="dateLivraison">
             </div>
             <div class="modal-footer">            
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="commandeForm.invalid" (click)="commander()" >Enregistrer</button>

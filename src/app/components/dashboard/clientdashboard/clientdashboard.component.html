@@ -1,42 +1,67 @@
-<br>
 <!-- Section: Design Block -->
 <section class="text-center">
     <!-- Background image -->
     <div class="p-5 bg-image" style="
-          background-image: url('/assets/img/background.jpg');
-          height: 150px;
-          "></div>
+        background-image: url('/assets/img/background.jpg');
+        height: 200px;">
+    </div>
     <!-- Background image -->
   
     <div class="card mx-4 mx-md-5 shadow-5-strong" style="
         margin-top: -100px; 
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);">
-        <div class="card-body py-5 px-md-5">  
+        <div class="card-body py-5 px-md-5">
+  
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
-                    <h2 class="fw-bold mb-5">{{title}}</h2>
+                    <h2 class="fw-bold mb-5">Commandes</h2>
                     <div class="row d-flex justify-content-center">
-                        <h3>Mes commandes</h3>
-                        <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="info-box bg-gradient-warning">
+                                <span class="info-box-icon"><i class="far fa-copy"></i></span>
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Uploads</span>
+                                  <span class="info-box-number">13,648</span>
+                                </div>
+                              </div>                              
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
                             <table class="table">
                                 <thead>
+                                    <th>Date de commande</th>
                                     <th>Nom du plat</th>
-                                    <th>Nombre</th>
-                                    <th>DateLivraison</th>
+                                    <th>Nombre commandés</th>
+                                    <th>Date de livraison</th>
                                 </thead>
-                                <tbody *ngFor="let commande of Commandes">
-                                    <td >{{ commande.namePlat }}</td>
-                                    <td >{{ commande.numberPlat }}</td>
-                                    <td >{{ commande.dateLivraison }}</td>                                    
+                                <tbody *ngFor="let commande of commandes">
+                                    <ng-template [ngIf] = "nameCurrentClient==commande.nameClient">
+                                        <td >{{ commande.date }}</td>
+                                        <td >{{ commande.namePlat }}</td>
+                                        <td >{{ commande.nombre }}</td>
+                                        <td >{{ commande.dateLivraison }}</td>
+                                        <!-- <td> 
+                                            <a [routerLink]="['/commandeliste/', commande.idCommande, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                            <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
+                                        </td> -->
+                                    </ng-template>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <!-- <span>Déjà un compte? <button type="button" class="btn btn-secondary" (click)="moveToLogin()">Se connecter</button></span> -->
             </div>
         </div>
     </div>
 </section>
 <!-- Section: Design Block -->
+
+<!-- <form [formGroup]="commandeForm">
+    <input formControlName="namePlat" type="text">
+    <input formControlName="nombre" type="number" min="1">
+    <input formControlName="dateLivraison" type="date">
+    <button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button>
+</form> -->
+
+<br><br>
