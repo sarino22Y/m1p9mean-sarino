@@ -36,7 +36,7 @@
                                     <td >{{ commande.dateLivraison }}</td>
                                     <td> 
                                         <a [routerLink]="['/commandeliste/', commande.idCommande, 'edit']" class="btn btn-outline-warning">Edit</a>
-                                        <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
+                                        <input (click)="infoUser()" type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
                                     </td>
                                 </tbody>
                             </table>
@@ -48,3 +48,12 @@
     </div>
 </section>
 <!-- Section: Design Block -->
+
+<form [formGroup]="commandeForm">
+    <input formControlName="namePlat" type="text">
+    <input formControlName="nombre" type="number" min="1">
+    <input formControlName="dateLivraison" type="date">
+    <button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button>
+</form>
+
+<br><br>
