@@ -17,7 +17,7 @@
                 <div class="col-lg-8">
                     <div style="margin-bottom: 3rem">
                         <h2 class="fw-bold">{{title}}</h2>
-                        <p>({{information}})</p>
+                        <p *ngIf="!loggedIn()">({{information}})</p>
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
@@ -53,24 +53,26 @@
           <h5 class="modal-title">Commander de plat.</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <label for="namePlat">Nom du plat</label>
-            <select type="text" formControlName="namePlat">
-                <option value="namePlat">Riz</option>
-            </select>
-        </div>
-        <div class="modal-body">
-            <label for="namePlat">Nombre à livrer</label>
-            <input type="number" formControlName="nombre">
-        </div>
-        <div class="modal-body">
-            <label for="namePlat">Date de livraison</label>
-            <input type="date" formControlName="dateLivraison">
-        </div>
-        <div class="modal-footer">            
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="commander()" >Enregistrer</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeCommandeModal()" >Annuler</button>
-        </div>
+        <form [formGroup]="commandeForm">
+            <div class="modal-body">
+                <label for="namePlat">Nom du plat</label>
+                <select formControlName="namePlat" *ngFor="let plat of plats" type="text" name="namePlat">
+                    <option value="{{ plat.name }}">{{ plat.name }}</option>
+                </select>
+            </div>
+            <div class="modal-body">
+                <label for="nombre">Nombre à livrer</label>
+                <input formControlName="nombre" min="1" maxtype="number" name="nombre">
+            </div>
+            <div class="modal-body">
+                <label for="dateLivraison">Date de livraison</label>
+                <input formControlName="dateLivraison" type="date" name="dateLivraison">
+            </div>
+            <div class="modal-footer">            
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="commandeForm.invalid" (click)="commander()" >Enregistrer</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeCommandeModal()" >Annuler</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>
