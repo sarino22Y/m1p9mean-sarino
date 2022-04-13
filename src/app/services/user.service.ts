@@ -10,6 +10,7 @@ import { IUsers } from '../models/iusers';
 })
 export class UserService {
   apiUrl: string = environment.apiUrl;
+  
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -18,6 +19,7 @@ export class UserService {
   }
 
   tokenResponse: any;
+  isUserConnected = false;
 
   private updateMenu = new Subject<void>();
   get updateTheMenu(){
@@ -36,6 +38,16 @@ export class UserService {
     .pipe(
       catchError(this.errorHandler)
     )
+  }
+
+  /**
+   * Modifier la valeur de boolean connected :
+   * Si true, user connected
+   * Si false, user deconnected
+   * @param connected 
+   */
+  setIsUserConnected(connected: boolean) {
+    this.isUserConnected = connected;
   }
 
   /**
@@ -126,6 +138,7 @@ export class UserService {
    * logout.
    */  
   logout(){
+    this.isUserConnected = false;
     localStorage.clear();
     localStorage.removeItem("token");
   }
@@ -153,11 +166,15 @@ export class UserService {
    * @returns 
    */
   getRoleByToken(token:any){  
-      token = localStorage.getItem('token')||'';
-      var extractToken = token.split('.')[1];
-      var atobData = atob(extractToken);
-      var finaldata = JSON.parse(atobData);
-      return finaldata.role;
+      token = localStorage.getItem('token') ? localStorage.getItem('token'): null;
+      if (token) {        
+        var extractToken = token.split('.')[1];
+        var atobData = atob(extractToken);
+        var finaldata = JSON.parse(atobData);
+        return finaldata.role;
+      } else {
+        return false;
+      }
   }
 
    /**

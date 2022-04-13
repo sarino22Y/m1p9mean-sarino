@@ -99,7 +99,6 @@ export class AccueilComponent implements OnInit {
       this.nameClientC =  res[0].name;
       this.adressClientC =  res[0].adress;
       this.mailClientC =  res[0].email;
-      console.log('ITYYRESESESE', res[0].email);
     })
   }
 

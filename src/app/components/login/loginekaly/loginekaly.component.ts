@@ -67,7 +67,7 @@ export class LoginekalyComponent implements OnInit {
     .subscribe({
       next: ( data:any ) => {
         this.responseData = data;
-        // console.log("TOKKKKENNN", this.responseData.token.split(' ')[1]); 
+        this.userService.setIsUserConnected(true);
         localStorage.setItem('token',this.responseData.token.split(' ')[1]);
         this.userService.updateTheMenu.next();
         this.route.navigate(['']);

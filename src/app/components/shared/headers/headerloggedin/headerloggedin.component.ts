@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 declare var window: any;
@@ -12,6 +11,7 @@ declare var window: any;
 })
 export class HeaderloggedinComponent implements OnInit {
 
+  public display = 'block';
   name: any;
   loginModal: any;
   registerModal: any;
@@ -30,11 +30,11 @@ export class HeaderloggedinComponent implements OnInit {
   displayUser: any;
 
   constructor(
-    private userService: UserService ,
+    public userService: UserService ,
     private route: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginModal = new window.bootstrap.Modal(
       document.getElementById("linksloginmodal")
     );
@@ -42,13 +42,14 @@ export class HeaderloggedinComponent implements OnInit {
     this.registerModal = new window.bootstrap.Modal(
       document.getElementById("linksregistermodal")
     );
-
+      
     this.userService.updateTheMenu.subscribe(res => {
       this.displayMenuCurrentUser();       
     });    
     this.displayMenuCurrentUser();
+        
   }
-
+      
   // Modals Login :
 
   openLoginModal(){
@@ -81,15 +82,17 @@ export class HeaderloggedinComponent implements OnInit {
 
   // Afficher le menu en fonction des utilisateur connecté.
   displayMenuCurrentUser(){
-    if (this.userService.getToken() != '') {
+
+    if (localStorage.getItem('token') != null) {
       this.curentRole = this.userService.getRoleByToken(this.userService.getToken());
+      
       // Ekaly seulement
       this.displayUser = this.curentRole == 'ekaly';
       this.displayPlat = this.curentRole == 'ekaly';
       this.displayRestaurant = (this.curentRole == 'ekaly');
       this.displayLivraison = (this.curentRole == 'ekaly');
       this.displayCommande = (this.curentRole == 'ekaly' || this.curentRole == 'deliverer');
-
+  
       // Tableau de bord.
       this.displayDashboardRestaurant = this.curentRole == 'restaurant';
       this.displayDashboardClient = this.curentRole == 'client';
@@ -100,11 +103,6 @@ export class HeaderloggedinComponent implements OnInit {
   // Nom d'utilisateur connecté.
   nameUser():any{
     return this.userService.nameOfUserConnected();
-  }
-
-  // Si un utilisateur est connecté.
-  loggedIn(){
-    return localStorage.getItem('token');
   }
 
   // Se deconnecter.

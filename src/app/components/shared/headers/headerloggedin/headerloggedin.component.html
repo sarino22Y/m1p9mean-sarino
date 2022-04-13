@@ -9,25 +9,25 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/">Accueil</a>
                 </li>
-                <li *ngIf="displayDashboardRestaurant && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayDashboardRestaurant && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/restaurant/dashboard">Tableau de bord Restaurant</a>
                 </li>
-                <li *ngIf="displayDashboardClient && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayDashboardClient && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/client/dashboard">Tableau de bord Client</a>
                 </li>
-                <li *ngIf="displayDashboardDeliverer && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayDashboardDeliverer && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/deliverer/dashboard">Tableau de bord Livreur</a>
                 </li>
-                <li *ngIf="displayPlat && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayPlat && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/platliste">Plats</a>
                 </li>
-                <li *ngIf="displayRestaurant && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayRestaurant && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/restaurantliste">Restaurants</a>
                 </li>
-                <li *ngIf="displayCommande && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayCommande && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/commandeliste">Commande</a>
                 </li>
-                <li *ngIf="displayLivraison && loggedIn()"class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayLivraison && userService.isUserConnected"class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/livraisonliste">Livraison</a>
                 </li>
                 <!-- <li class="nav-item dropdown" routerLinkActive="active">
@@ -41,18 +41,18 @@
                         <li><a class="dropdown-item" routerLink="/user/livreur">Livreurs</a></li>
                     </ul>
                 </li> -->
-                <li *ngIf="displayUser && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayUser && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/privilegeliste">Privilèges</a>
                 </li>
-                <li *ngIf="displayUser && loggedIn()" class="nav-item" routerLinkActive="active">
+                <li *ngIf="displayUser && userService.isUserConnected" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/users">Utilisateurs</a>
                 </li>
             </ul>
             <div class="d-flex">
-                <button class="btn btn-light ms-3 nav-link" *ngIf="!loggedIn()" (click)="openLoginModal()"><span class="nav-link" >Se connecter</span></button>
-                <button class="btn btn-light ms-3 nav-link" *ngIf="!loggedIn()" (click)="openRegisterModal()"><span class="nav-link" >S'inscrire</span></button>
-                <h5 *ngIf="loggedIn()"> <p></p> Bonjour <strong>{{nameUser()}}</strong></h5>
-                <span class="btn btn-light ms-3" (click)="logout()" *ngIf="loggedIn()"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
+                <button class="btn btn-light ms-3 nav-link" *ngIf="!userService.isUserConnected" (click)="openLoginModal()"><span class="nav-link" >Se connecter</span></button>
+                <button class="btn btn-light ms-3 nav-link" *ngIf="!userService.isUserConnected" (click)="openRegisterModal()"><span class="nav-link" >S'inscrire</span></button>
+                <h5 *ngIf="userService.isUserConnected"> <p></p> Bonjour <strong>{{nameUser()}}</strong></h5>
+                <span class="btn btn-light ms-3" (click)="logout()" *ngIf="userService.isUserConnected"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
             </div>
         </div>
     </div>
