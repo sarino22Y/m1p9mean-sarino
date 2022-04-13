@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Icommande } from 'src/app/models/icommande';
 import { CommandeService } from 'src/app/services/commande.service';
-import { PlatService } from 'src/app/services/plat-service.service';
+import { PlatService } from 'src/app/services/plat.service';
 import { UserService } from 'src/app/services/user.service';
 
 declare var window: any;

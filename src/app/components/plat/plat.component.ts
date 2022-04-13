@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlatService } from 'src/app/services/plat-service.service';
+import { PlatService } from 'src/app/services/plat.service';
 
 
 @Component({

@@ -41,16 +41,6 @@ export class UserService {
   }
 
   /**
-   * Modifier la valeur de boolean connected :
-   * Si true, user connected
-   * Si false, user deconnected
-   * @param connected 
-   */
-  setIsUserConnected(connected: boolean) {
-    this.isUserConnected = connected;
-  }
-
-  /**
    * Methode pour s'enregistrer en tant que restaurant.
    * @param data 
    * @returns 
@@ -150,6 +140,16 @@ export class UserService {
   isLoggedIn(){
     return localStorage.getItem('token') != null;
   }
+
+  /**
+   * Modifier la valeur de boolean connected :
+   * Si true, user connected
+   * Si false, user deconnected
+   * @param connected 
+   */
+     setIsUserConnected(connected: boolean) {
+      this.isUserConnected = connected;
+    }
 
   /**
    * Obtenir le Token.
