@@ -19,7 +19,7 @@ export class UserService {
   }
 
   tokenResponse: any;
-  isUserConnected = false;
+  isLoggedin: boolean = false;
 
   private updateMenu = new Subject<void>();
   get updateTheMenu(){
@@ -128,7 +128,6 @@ export class UserService {
    * logout.
    */  
   logout(){
-    this.isUserConnected = false;
     localStorage.clear();
     localStorage.removeItem("token");
   }
@@ -138,18 +137,24 @@ export class UserService {
    * @returns token
    */
   isLoggedIn(){
-    return localStorage.getItem('token') != null;
+    if (!localStorage.getItem("token")) {
+      this.isLoggedin = false;
+      return this.isLoggedin;
+    }
+    else {
+      return true;
+    }
   }
 
-  /**
-   * Modifier la valeur de boolean connected :
-   * Si true, user connected
-   * Si false, user deconnected
-   * @param connected 
-   */
-     setIsUserConnected(connected: boolean) {
-      this.isUserConnected = connected;
-    }
+  // /**
+  //  * Modifier la valeur de boolean connected :
+  //  * Si true, user connected
+  //  * Si false, user deconnected
+  //  * @param connected 
+  //  */
+  //   setIsUserConnected(connected: boolean) {
+  //     this.isUserConnected = connected;
+  //   }
 
   /**
    * Obtenir le Token.

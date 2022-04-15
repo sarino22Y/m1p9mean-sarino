@@ -10,15 +10,11 @@ export class AppComponent implements OnInit {
   title = 'm1p9mean-sarino';
 
   constructor(
-    private userService: UserService
   ){
 
   }
 
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
-      this.userService.setIsUserConnected(true);
-    }
+    
   }
 }

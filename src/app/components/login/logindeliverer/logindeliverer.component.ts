@@ -67,7 +67,6 @@ export class LogindelivererComponent implements OnInit {
     .subscribe({
       next: ( data:any ) => {
         this.responseData = data;
-        this.userService.setIsUserConnected(true);
         localStorage.setItem('token',this.responseData.token.split(' ')[1]);
         this.userService.updateTheMenu.next();
         this.route.navigate(['']);

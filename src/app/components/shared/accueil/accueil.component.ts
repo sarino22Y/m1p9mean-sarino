@@ -53,7 +53,6 @@ export class AccueilComponent implements OnInit {
       this.displayButtonCommandForClient();       
     });    
     this.displayButtonCommandForClient();
-
     this.infoUser();
     this.userService.updateTheMenu.subscribe(res => {
       this.createForm();       

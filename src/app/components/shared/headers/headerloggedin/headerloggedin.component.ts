@@ -44,7 +44,7 @@ export class HeaderloggedinComponent implements OnInit {
     );
       
     this.userService.updateTheMenu.subscribe(res => {
-      this.displayMenuCurrentUser();       
+      this.displayMenuCurrentUser();
     });    
     this.displayMenuCurrentUser();
         
@@ -98,6 +98,14 @@ export class HeaderloggedinComponent implements OnInit {
       this.displayDashboardClient = this.curentRole == 'client';
       this.displayDashboardDeliverer = this.curentRole == 'deliverer';
     }
+  }
+
+  /**
+   * Est-ce-que un utilisateur est connecté.
+   * @returns 
+   */
+  isLoggedIn(): boolean {
+    return this.userService.isLoggedIn();
   }
 
   // Nom d'utilisateur connecté.
