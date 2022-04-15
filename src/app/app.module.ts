@@ -26,9 +26,6 @@ import { HeadernotloggedinComponent } from './components/shared/headers/headerno
 import { AccueilComponent } from './components/shared/accueil/accueil.component';
 import { AccueilRoutingModule } from './routes/accueil-routing.module';
 import { UserComponent } from './components/user/user.component';
-import { LoginekalyComponent } from './components/login/loginekaly/loginekaly.component';
-import { LoginrestaurantComponent } from './components/login/loginrestaurant/loginrestaurant.component';
-import { LogindelivererComponent } from './components/login/logindeliverer/logindeliverer.component';
 import { RegisterrestaurantComponent } from './components/register/registerrestaurant/registerrestaurant.component';
 import { RegisterekalyComponent } from './components/register/registerekaly/registerekaly.component';
 import { RegisterdelivererComponent } from './components/register/registerdeliverer/registerdeliverer.component';
@@ -54,9 +51,6 @@ import { DashboardRoutingModule } from './routes/dashboard-routing.module';
     RegisterComponent,
     AccueilComponent,
     UserComponent,
-    LoginekalyComponent,
-    LoginrestaurantComponent,
-    LogindelivererComponent,
     RegisterrestaurantComponent,
     RegisterekalyComponent,
     RegisterdelivererComponent,

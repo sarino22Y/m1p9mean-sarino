@@ -49,42 +49,14 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <button class="btn btn-light ms-3 nav-link" *ngIf="!isLoggedIn()" (click)="openLoginModal()"><span class="nav-link" >Se connecter</span></button>
+                <button class="btn btn-light ms-3 nav-link" *ngIf="!isLoggedIn()" ><a routerLink="/user/login" class="nav-link" >Se connecter</a></button>
                 <button class="btn btn-light ms-3 nav-link" *ngIf="!isLoggedIn()" (click)="openRegisterModal()"><span class="nav-link" >S'inscrire</span></button>
                 <h5 *ngIf="isLoggedIn()"> <p></p> Bonjour <strong>{{nameUser()}}</strong></h5>
                 <span class="btn btn-light ms-3" (click)="logout()" *ngIf="isLoggedIn()"><a class="nav-link" routerLink="/user/logout">Se deconnecter</a></span>
             </div>
         </div>
     </div>
-</nav>
-
-<!-- Modal pour les differents liens de connection. -->
-<div class="modal" tabindex="-1" id="linksloginmodal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Se connecter en tant que: </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <a class="nav-link" routerLink="/user/login" (click)="hideLoginModal()"> Client</a>
-        </div>
-        <div class="modal-body">
-            <a class="nav-link" routerLink="/user/loginrestaurant" (click)="hideLoginModal()">Restaurant</a>
-        </div>
-        <div class="modal-body">
-            <a class="nav-link" routerLink="/user/logindeliverer" (click)="hideLoginModal()">Livreur</a>
-        </div>
-        <div class="modal-body">
-            <a class="nav-link" routerLink="/user/loginekaly" (click)="hideLoginModal()">Responsable de Ekaly </a>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeLoginModal()">Annuler</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+</nav>  
   
 <!-- Modal pour les differents liens de s'inscription. -->
 <div class="modal" tabindex="-1" id="linksregistermodal">

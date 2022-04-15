@@ -77,48 +77,12 @@ export class UserService {
   }
 
   /**
-   * Methode pour se connecter en tant que client.
+   * Methode pour se connecter.
    * @param data 
    * @returns 
    */
   login(data: any){
-    return this.http.post(this.apiUrl + '/users/login-client', data, this.httpOptions)
-    .pipe(
-      catchError(this.errorHandlerLogin)
-    )
-  }
-
-  /**
-   * Methode pour se connecter en tant que ekaly.
-   * @param data 
-   * @returns 
-   */
-   loginRestaurant(data: any){
-    return this.http.post(this.apiUrl + '/users/login-restaurant', data, this.httpOptions)
-    .pipe(
-      catchError(this.errorHandlerLogin)
-    )
-  }
-
-  /**
-   * Methode pour se connecter en tant que livreur.
-   * @param data 
-   * @returns 
-   */
-   loginDeliverer(data: any){
-    return this.http.post(this.apiUrl + '/users/login-deliverer', data, this.httpOptions)
-    .pipe(
-      catchError(this.errorHandlerLogin)
-    )
-  }
-
-  /**
-   * Methode pour se connecter en tant que ekaly.
-   * @param data 
-   * @returns 
-   */
-   loginEkaly(data: any){
-    return this.http.post(this.apiUrl + '/users/login-ekaly', data, this.httpOptions)
+    return this.http.post(this.apiUrl + '/users/login', data, this.httpOptions)
     .pipe(
       catchError(this.errorHandlerLogin)
     )

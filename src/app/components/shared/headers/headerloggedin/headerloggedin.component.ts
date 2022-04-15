@@ -10,10 +10,6 @@ declare var window: any;
   styleUrls: ['./headerloggedin.component.css']
 })
 export class HeaderloggedinComponent implements OnInit {
-
-  public display = 'block';
-  name: any;
-  loginModal: any;
   registerModal: any;
 
   displayDashboardRestaurant: any;
@@ -34,11 +30,7 @@ export class HeaderloggedinComponent implements OnInit {
     private route: Router
   ) { }
 
-  ngOnInit() {
-    this.loginModal = new window.bootstrap.Modal(
-      document.getElementById("linksloginmodal")
-    );
-    
+  ngOnInit() {    
     this.registerModal = new window.bootstrap.Modal(
       document.getElementById("linksregistermodal")
     );
@@ -49,22 +41,7 @@ export class HeaderloggedinComponent implements OnInit {
     this.displayMenuCurrentUser();
         
   }
-      
-  // Modals Login :
-
-  openLoginModal(){
-    this.loginModal.show();
-  }
-
-  hideLoginModal(){
-    this.loginModal.hide();
-  }
-
-  closeLoginModal(){
-    this.loginModal.hide();
-    this.route.navigate(['']);
-  }
-
+  
   // Modals Register :
 
   openRegisterModal(){
