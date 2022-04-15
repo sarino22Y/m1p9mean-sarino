@@ -263,6 +263,7 @@ export class UserService {
     } else {
       errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
     }
+    alert("Une erreur s'est produite, veuillez réessayer ultérieurement.");
     return errorMessage;
    }
 
@@ -279,7 +280,7 @@ export class UserService {
     } else {
       errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
     }
-    alert("Veiullez vous rendre sur le login correspondant à votre compte.")
+    alert("Une erreur s'est produite, veuillez réessayer ultérieurement.");
     return errorMessage;
    }
 }

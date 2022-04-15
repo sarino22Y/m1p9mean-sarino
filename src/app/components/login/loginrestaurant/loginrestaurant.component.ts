@@ -72,7 +72,7 @@ export class LoginrestaurantComponent implements OnInit {
         this.route.navigate(['']);
       },
       error: (e) => {
-        console.error("EREURRR",e);
+        console.error("EREUR",e);
       }
     })
   }
