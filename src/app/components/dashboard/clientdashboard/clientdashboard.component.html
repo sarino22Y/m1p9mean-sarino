@@ -36,7 +36,7 @@
                                     <th>Date de livraison</th>
                                 </thead>
                                 <tbody *ngFor="let commande of commandes">
-                                    <ng-template [ngIf] = "nameCurrentClient==commande.nameClient">
+                                    <ng-template [ngIf] = "nameClientC == commande.nameClient">
                                         <td >{{ commande.date }}</td>
                                         <td >{{ commande.namePlat }}</td>
                                         <td >{{ commande.nombre }}</td>
