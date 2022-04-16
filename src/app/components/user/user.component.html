@@ -17,7 +17,7 @@
                 <div class="col-lg-8">
                     <h2 class="fw-bold mb-5">Users</h2>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-12">
+                        <div class="col-md-11">                            
                             <table class="table table-bordered table-sm">
                                 <thead class="thead-light">
                                     <th>Nom</th>
@@ -26,15 +26,21 @@
                                     <th></th>
                                 </thead>
                                 <tbody *ngFor="let user of users">
-                                    <td >{{ user.username }}</td>
-                                    <td >{{ user.name }}</td>
-                                    <td >{{ user.role }}</td>
-                                    <td> 
-                                        <a href="#" [routerLink]="['/userliste/', user.idPrivilege, 'edit']" class="btn btn-outline-warning">Edit</a>
-                                        <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
-                                    </td>
+                                    <ng-template [ngIf] = "IsRoleIncludeInUser(user.role)">
+                                        <td >{{ user.username }}</td>
+                                        <td >{{ user.name }}</td>
+                                        <td >{{ user.role }}</td>
+                                        <td> 
+                                            <a href="#" [routerLink]="['/userliste/', user.idPrivilege, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                            <a type="button" [routerLink]="['/users/', result]"  name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger" (click)="delete(user._id)" >Supprimer</a>
+                                        </td>
+                                    </ng-template>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="openRegisterModal()" >Nouveau</button>
                         </div>
                     </div>
                 </div>
@@ -45,5 +51,56 @@
 <!-- Section: Design Block -->
 
 <!-- Debu: Modal pour la mise à jour des users-->
+<div class="modal" tabindex="-1" id="registermodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Créer un compte {{ result }}.</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeRegisterModal()"></button>
+        </div>
+        <form [formGroup]="registerForm">
 
+             <!-- Name input -->
+             <div class="modal-body">
+                <label class="form-label" for="name">Nom :</label>
+                <input formControlName="name" type="text" id="name" class="form-control" />
+            </div>
+            <!-- Username input -->
+            <div class="modal-body">
+                <label class="form-label" for="username">Nom d'utilisateur :</label>
+                <input formControlName="username" type="text" id="username" class="form-control" />
+            </div>
+            <!-- Email input -->
+            <div class="modal-body">
+                <label class="form-label" for="email">Email :</label>
+                <input formControlName="email" type="email" id="email" class="form-control" />
+            </div>
+
+             <!-- Adress input -->
+             <div class="modal-body">
+                <label class="form-label" for="adress">Addresse :</label>
+                <input formControlName="adress" type="text" id="adress" class="form-control" />
+            </div>
+
+            <!-- Password input -->
+            <div class="modal-body">
+                <label class="form-label" for="password">Mots de passe :</label>
+                <input formControlName="password" type="password" id="password" class="form-control" />
+            </div>
+
+            <!-- Confirm password input -->
+            <div class="modal-body">
+                <label class="form-label" for="confirmpassword">Confirmer le mots de passe :</label>
+                <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control" />
+            </div>
+
+            <!-- Submit button /or cancel -->
+            <div class="modal-footer">            
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="registerForm.invalid" (click)="register()">Enregistrer </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeRegisterModal()" >Annuler</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
 <!-- Fin: Modal pour la mise à jour des users-->

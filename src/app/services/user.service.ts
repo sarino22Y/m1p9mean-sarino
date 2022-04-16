@@ -27,6 +27,18 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Methode pour s'enregistrer pour tout.
+   * @param data 
+   * @returns 
+   */
+   registerByAdmin(data: IUsers){
+    return this.http.post(this.apiUrl + '/register', data, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
    
   /**
    * Methode pour s'enregistrer en tant que client.
@@ -151,7 +163,7 @@ export class UserService {
    * @param id 
    * @returns HttpClient
    */
-    getUserById(id: number): Observable<any>
+    getUserById(id: any): Observable<any>
     {
       return this.http.get(this.apiUrl + '/users/' + id) 
       .pipe(
@@ -213,6 +225,17 @@ export class UserService {
      return this.http.get(this.apiUrl + '/users')
    }
 
+   /**
+   * Supprimer un utilisateur.
+   * @returns HttpClient
+   */
+    delete(idUser: any){
+      return this.http.delete(this.apiUrl + '/users/' + idUser, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandlerLogin)
+      )
+    }
+ 
   
   /**
    * Capture d'erreur.

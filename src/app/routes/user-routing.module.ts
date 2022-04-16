@@ -8,6 +8,7 @@ import { UserComponent } from '../components/user/user.component';
 import { RegisterekalyComponent } from '../components/register/registerekaly/registerekaly.component';
 import { RegisterrestaurantComponent } from '../components/register/registerrestaurant/registerrestaurant.component';
 import { RegisterdelivererComponent } from '../components/register/registerdeliverer/registerdeliverer.component';
+import { AuthGuard } from '../shared/auth/auth.guard';
 
 const routes: Routes = [
     {path: 'user/register', component: RegisterComponent},
@@ -16,7 +17,11 @@ const routes: Routes = [
     {path: 'user/registerdeliverer', component: RegisterdelivererComponent},
     {path: 'user/login', component: LoginComponent},
     {path: 'user/logout', component: LoginComponent},
-    {path: 'users', component: UserComponent,canActivate:[RoleGuard]}
+    {path: 'users', component: UserComponent,canActivate:[RoleGuard]},
+    {path: 'users/ekaly', component: UserComponent,canActivate:[RoleGuard]},
+    {path: 'users/restaurant', component: UserComponent,canActivate:[RoleGuard, AuthGuard]},
+    {path: 'users/client', component: UserComponent,canActivate:[RoleGuard]},
+    {path: 'users/deliverer', component: UserComponent,canActivate:[RoleGuard]}
 ]
 
 @NgModule({

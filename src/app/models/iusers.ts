@@ -5,4 +5,5 @@ export interface IUsers {
     adress: string,
     password: string,
     confirmPassword: string
+    role: string;
 }
