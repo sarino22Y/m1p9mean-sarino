@@ -27,8 +27,8 @@
                                 </thead>
                                 <tbody *ngFor="let user of users">
                                     <ng-template [ngIf] = "IsRoleIncludeInUser(user.role)">
-                                        <td >{{ user.username }}</td>
                                         <td >{{ user.name }}</td>
+                                        <td >{{ user.username }}</td>
                                         <td >{{ user.role }}</td>
                                         <td> 
                                             <a href="#" [routerLink]="['/userliste/', user.idPrivilege, 'edit']" class="btn btn-outline-warning">Edit</a>
