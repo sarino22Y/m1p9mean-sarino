@@ -1,0 +1,183 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <a href="/" class="brand-link">
+        <img src="" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">E-KALY</span>
+    </a>
+
+    <div class="sidebar">
+
+        <div *ngIf="isLoggedIn()"  class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <!-- <div class="image">
+                <img src="" class="img-circle elevation-2" alt="">
+            </div> -->
+            <div *ngIf="isLoggedIn()" class="nav-header" id="divBonjour">
+                <h5> Bonjour </h5>
+            </div>
+            <div class="info">
+                <a href="#" class="d-block"><strong>{{nameUser()}}</strong></a>
+            </div>
+        </div>
+        
+        <nav  class="mt-2">
+           
+                
+            <!-- DEBUT: Menu EKALY -->
+            <ul *ngIf="displayDashboardEkaly && isLoggedIn()" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open" routerLinkActive="active">
+                    <a routerLink="/restaurant/dashboard" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Tableau de bord
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">PLATS</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Tous les plats</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Plats commandés</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Plats vendus</p>
+                    </a>
+                </li>
+                <li class="nav-header">UTILISATEURS</li>
+                <li class="nav-item">   
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Profile
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/examples/profile.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Restaurants</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/examples/profile.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Clients</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/examples/profile.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Livreurs</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- FIN: Menu EKALY -->
+
+            <!-- DEBUT: Menu RESTAURANTS -->
+            <ul *ngIf="displayDashboardRestaurant && isLoggedIn()" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open" routerLinkActive="active">
+                    <a routerLink="/restaurant/dashboard" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Tableau de bord
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-header">MES PLATS</li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Tous les plats</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Plats commandés</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Plats vendus</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Bénéfices</p>
+                    </a>
+                </li>
+            </ul>
+            <!-- FIN: Menu RESTAURANTS -->
+
+            <!-- DEBUT: Menu CLIENTS -->
+            <ul *ngIf="displayDashboardClient && isLoggedIn()" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open" routerLinkActive="active">
+                    <a routerLink="/client/dashboard" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Tableau de bord
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Tous les plats</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Mes commandés</p>
+                    </a>
+                </li>
+            </ul>
+            <!-- FIN: Menu CLIENTS -->
+
+            <!-- DEBUT: Menu LIVREURS -->
+            <ul *ngIf="displayDashboardDeliverer && isLoggedIn()" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open">
+                    <a routerLink="/deliverer/dashboard" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Tableau de bord
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Tous les plats</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Plats à livrer</p>
+                    </a>
+                </li>
+            </ul>
+            <!-- FIN: Menu LIVREURS -->
+
+        </nav>
+
+    </div>
+
+</aside>
