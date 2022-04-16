@@ -35,9 +35,7 @@ export class AccueilComponent implements OnInit {
     private commandeService: CommandeService,
     private formBuilder: FormBuilder,
     private route: Router
-    ) { 
-      this.infoUser();
-    }
+    ) { }
 
   async ngOnInit() {
 
