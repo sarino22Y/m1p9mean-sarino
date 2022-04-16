@@ -4,7 +4,7 @@ import { AccueilComponent } from '../components/shared/accueil/accueil.component
 
 const routes: Routes = [
     {path: '', component: AccueilComponent},
-    {path: 'm1p9mean-sarino', component: AccueilComponent}
+    {path: 'm1p9mean-sarino', redirectTo: '', pathMatch: 'full'}
 ]
 
 @NgModule({
