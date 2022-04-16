@@ -22,7 +22,6 @@ import { PrivilegeRoutingModule } from './routes/privilege-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HeaderloggedinComponent } from './components/shared/headers/headerloggedin/headerloggedin.component';
-import { HeadernotloggedinComponent } from './components/shared/headers/headernotloggedin/headernotloggedin.component';
 import { AccueilComponent } from './components/shared/accueil/accueil.component';
 import { AccueilRoutingModule } from './routes/accueil-routing.module';
 import { UserComponent } from './components/user/user.component';
@@ -33,13 +32,12 @@ import { ClientdashboardComponent } from './components/dashboard/clientdashboard
 import { RestaurantdashboardComponent } from './components/dashboard/restaurantdashboard/restaurantdashboard.component';
 import { DelivererdashboardComponent } from './components/dashboard/delivererdashboard/delivererdashboard.component';
 import { DashboardRoutingModule } from './routes/dashboard-routing.module';
-
+import { MenusComponent } from './components/shared/menus/menus.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
     HeaderloggedinComponent,
-    HeadernotloggedinComponent,
+    MenusComponent,
     FooterComponent,
     PlatComponent,
     ErrorComponent,
