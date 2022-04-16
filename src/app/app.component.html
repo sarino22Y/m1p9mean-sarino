@@ -1,4 +1,37 @@
-<app-headerloggedin></app-headerloggedin>
-<router-outlet></router-outlet>
-<br><br>
+<div class="wrapper">
+
+    <app-menus></app-menus>
+    <div class="content-wrapper">
+
+        <app-headerloggedin></app-headerloggedin>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h2 class="card-title"></h2>
+                        <div class="card-tools">
+                            <a routerLink="/" class="btn btn-tool btn-sm">
+                                <i class="fas fa-download"></i>
+                            </a>
+                            <a routerLink="/" class="btn btn-tool btn-sm">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <aside class="control-sidebar control-sidebar-dark"></aside>
+
+</div>
+
 <app-footer></app-footer>
