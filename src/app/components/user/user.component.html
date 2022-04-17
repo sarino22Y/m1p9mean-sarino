@@ -14,15 +14,17 @@
         <div class="card-body py-5 px-md-5">
   
             <div class="row d-flex justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <h2 class="fw-bold mb-5">Users</h2>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-11">                            
+                        <div class="col-md-10">                            
                             <table class="table table-bordered table-sm">
                                 <thead class="thead-light">
                                     <th>Nom</th>
                                     <th>Nom d'utilisateur</th>
                                     <th>Rôle</th>
+                                    <th>Adresse</th>
+                                    <th>Email</th>
                                     <th></th>
                                 </thead>
                                 <tbody *ngFor="let user of users">
@@ -30,16 +32,18 @@
                                         <td >{{ user.name }}</td>
                                         <td >{{ user.username }}</td>
                                         <td >{{ user.role }}</td>
+                                        <td >{{ user.adress }}</td>
+                                        <td >{{ user.email }}</td>
                                         <td> 
-                                            <a type="button" *ngIf="dspButtonToCurrentUser" (click)="openUpdateModal()" (click)="getById(user._id)" class="btn btn-outline-warning">Edit</a>
-                                            <a type="button" [routerLink]="['/users/', result]"  name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger" (click)="delete(user._id)" >Supprimer</a>
+                                            <a type="button" *ngIf="dspButtonToCurrentUser" (click)="openUpdateModal()" (click)="getById(user._id)" class="btn btn-outline-warning" id="aedit">Modifier</a>
+                                            <a type="button" [routerLink]="['/users/', result]"  name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger" (click)="delete(user._id)" id="adelete">Supprimer</a>
                                         </td>
                                     </ng-template>
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="openRegisterModal()" >Nouveau</button>
                         </div>
                     </div>
