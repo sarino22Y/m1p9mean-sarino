@@ -235,7 +235,18 @@ export class UserService {
         catchError(this.errorHandlerLogin)
       )
     }
- 
+
+     /**
+   * Supprimer un utilisateur.
+   * @returns HttpClient
+   */
+    edit(id: any, data: any){
+      return this.http.put(this.apiUrl + '/users/' + id, data, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandlerLogin)
+      )
+    }
+
   
   /**
    * Capture d'erreur.

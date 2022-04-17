@@ -20,6 +20,18 @@ export class UserComponent implements OnInit {
   registerForm!: FormGroup;
   registerModal: any;
   model!: IUsers;
+  updateForm!: FormGroup;
+  updateModal: any;
+
+  curentRole: any;
+  dspButtonToCurrentUser: any;
+
+  idById: any;
+  nameById: any;
+  usernameById: any;
+  emailById: any;
+  adressById: any
+  passwordById: any;
 
   constructor(
     private userService:UserService,
@@ -35,15 +47,29 @@ export class UserComponent implements OnInit {
 
     await this.getListeUser();
 
-    
     this.registerModal = new window.bootstrap.Modal(
       document.getElementById("registermodal")
+    );
+
+    
+    this.updateModal = new window.bootstrap.Modal(
+      document.getElementById("updatemodal")
     );
 
     this.userService.updateTheMenu.subscribe(res => {
       this.createForm();       
     });    
     this.createForm();
+
+    this.userService.updateTheMenu.subscribe(res => {
+      this.editForm();       
+    });    
+    this.editForm();
+
+    this.userService.updateTheMenu.subscribe(res => {
+      this.displayButtonToCurrentUser();
+    });    
+    this.displayButtonToCurrentUser();
   }
 
   /**
@@ -61,6 +87,20 @@ export class UserComponent implements OnInit {
   }
 
   /**
+   * Form de update.
+   */
+   editForm() {
+    this.updateForm = this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      adress: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
+    },{validators: matchingPasswordsValidator});
+  }
+
+  /**
    * Ouvrir le modal de register.
    */
   openRegisterModal(){
@@ -72,7 +112,20 @@ export class UserComponent implements OnInit {
    */
   closeRegisterModal(){
     this.registerModal.hide();
-    this.route.navigate(['']);
+  }
+
+  /**
+   * Ouvrir le modal de update.
+   */
+   openUpdateModal(){
+    this.updateModal.show();
+  }
+
+  /**
+   * Fermer le modal de register.
+   */
+   closeUpdateModal(){
+    this.updateModal.hide();
   }
 
   /**
@@ -90,6 +143,17 @@ export class UserComponent implements OnInit {
     
   }
 
+  displayButtonToCurrentUser() {
+    if (localStorage.getItem('token') != null) {
+      this.curentRole = this.userService.getRoleByToken(this.userService.getToken());      
+      // Ekaly seulement
+      this.dspButtonToCurrentUser = this.curentRole == 'ekaly' && this.curentRole == this.result;
+
+      console.log("DISPALY BUTTON ----------",this.dspButtonToCurrentUser);
+      
+    }
+  }
+
   /**
    * Liste des users.
    */
@@ -99,6 +163,22 @@ export class UserComponent implements OnInit {
       this.users = res['users'];
       console.log('ITY',this.users[0].role);
     });
+  }
+
+  getById(id: any) {
+    return this.userService.getUserById(new Object(id)).subscribe( res => {
+      this.updateForm = this.formBuilder.group({
+        name: this.formBuilder.control(res[0].name),
+        username: this.formBuilder.control(res[0].username),
+        email: this.formBuilder.control(res[0].email),
+        adress: this.formBuilder.control(res[0].adress),
+        password: new FormControl('',  [Validators.required]),
+        confirmPassword: new FormControl('',  [Validators.required])
+      },{validators: matchingPasswordsValidator});
+
+      this.idById = res[0]._id;
+      this.usernameById = res[0].username;
+    })
   }
 
   /**
@@ -145,5 +225,25 @@ export class UserComponent implements OnInit {
          })
        }
      });    
+  }
+
+  /**
+   * Méthode appellée par le boutton s'inscrire.
+   * @returns 
+   */
+   update(){
+    this.model = this.updateForm.value;
+    if(confirm("Mettre à jour : " + this.usernameById)) {
+      this.userService.edit(this.idById, this.model)
+      .subscribe({
+        next: ( data ) => {
+          window.location.href= "users/" + this.result;
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      })
+      console.log(JSON.stringify(this.registerForm.value));
+    }
   }
 }

@@ -21,7 +21,8 @@ const routes: Routes = [
     {path: 'users/ekaly', component: UserComponent,canActivate:[RoleGuard]},
     {path: 'users/restaurant', component: UserComponent,canActivate:[RoleGuard, AuthGuard]},
     {path: 'users/client', component: UserComponent,canActivate:[RoleGuard]},
-    {path: 'users/deliverer', component: UserComponent,canActivate:[RoleGuard]}
+    {path: 'users/deliverer', component: UserComponent,canActivate:[RoleGuard]},
+    {path: 'users/:id/edit', component: UserComponent}
 ]
 
 @NgModule({
