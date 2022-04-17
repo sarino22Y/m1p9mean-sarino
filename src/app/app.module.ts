@@ -33,6 +33,7 @@ import { RestaurantdashboardComponent } from './components/dashboard/restaurantd
 import { DelivererdashboardComponent } from './components/dashboard/delivererdashboard/delivererdashboard.component';
 import { DashboardRoutingModule } from './routes/dashboard-routing.module';
 import { MenusComponent } from './components/shared/menus/menus.component';
+import { EkalydashboardComponent } from './components/dashboard/ekalydashboard/ekalydashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { MenusComponent } from './components/shared/menus/menus.component';
     RegisterdelivererComponent,
     ClientdashboardComponent,
     RestaurantdashboardComponent,
-    DelivererdashboardComponent
+    DelivererdashboardComponent,
+    EkalydashboardComponent
   ],
   imports: [
     BrowserModule,

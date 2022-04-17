@@ -1,0 +1,93 @@
+<section class="content">
+    <div class="container-fluid"> 
+        <div class="row">
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ nbrPlats }}</h3>
+                        <p>Nombre des plats disponible</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a routerLink="" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ nbrClient }} <!-- <sup style="font-size: 20px">%</sup> -->
+                        </h3>
+                        <p>Nombre des clients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a routerLink="/users/client" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>{{ nbrRestaurant }}</h3>
+                        <p>Nombre des restaurants</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a routerLink="/users/restaurant" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ nbrDeliverer }}</h3>
+                        <p>Nombre des livreurs</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a routerLink="/users/deliverer" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                                <th>Restaurants</th>
+                                <th>Bénefice par jour</th>
+                                <th></th>
+                            </thead>
+                            <tbody *ngFor="">
+                                <td ></td>
+                                <td ></td>
+                                <td>
+                                    <a >Plus d'information</a>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
