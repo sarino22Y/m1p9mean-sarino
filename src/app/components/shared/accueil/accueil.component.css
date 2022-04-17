@@ -1,0 +1,12 @@
+.ng-select.namePlat {
+    border:1px;
+    min-height: 0px;
+    border-radius: 0;
+}
+
+.ng-select ::ng-deep .ng-select-container {
+    color: rgba(0,0,0,0.87);
+    align-items: baseline;
+    min-height: 0px!important;
+    width: 80%;
+}
