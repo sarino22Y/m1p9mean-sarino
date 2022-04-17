@@ -8,6 +8,7 @@ import { RestaurantRoutingModule  } from './routes/restaurant-routing.module';
 import { AppRoutingModule } from './routes/app-routing.module';
 import { CommandeRoutingModule } from './routes/commande-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { PlatComponent } from './components/plat/plat.component';
@@ -62,6 +63,7 @@ import { EkalydashboardComponent } from './components/dashboard/ekalydashboard/e
     BrowserModule,
     AccueilRoutingModule,   
     ReactiveFormsModule,
+    NgSelectModule,
     HttpClientModule,
     UserRoutingModule,
     PrivilegeRoutingModule,

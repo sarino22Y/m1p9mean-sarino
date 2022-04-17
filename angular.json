@@ -32,6 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/admin-lte/plugins/select2/css/select2.min.css",
               "node_modules/admin-lte/dist/css/adminlte.min.css"
             ],
             "scripts": [
