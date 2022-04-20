@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-import { catchError, Observable, throwError } from 'rxjs'
+import { catchError, Observable, Subject, throwError } from 'rxjs'
 
 import { environment } from 'src/environments/environment';
 
@@ -11,8 +11,14 @@ import { environment } from 'src/environments/environment';
 export class PlatService {
 
   apiUrl: string = environment.apiUrl;
+  
+  private updatePlat = new Subject<void>();
 
   constructor( private http: HttpClient) { }
+
+  get updateThePlats(){
+    return this.updatePlat;
+  }
 
   /**
    * Retourner la liste de plat.
@@ -28,7 +34,7 @@ export class PlatService {
    * @param id 
    * @returns HttpClient
    */
-  getOne(id: number): Observable<any>
+  getPlatById(id: number): Observable<any>
   {
     return this.http.get(this.apiUrl + '/plat/' + id) 
     .pipe(
@@ -60,7 +66,10 @@ export class PlatService {
    */
   delete(id:any) 
   {
-    return this.http.delete(this.apiUrl + '/plat/' + id) ;
+    return this.http.delete(this.apiUrl + '/plat/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
 
   /**

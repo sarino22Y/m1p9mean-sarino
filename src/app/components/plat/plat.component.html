@@ -17,24 +17,30 @@
                 <div class="col-lg-8">
                     <h2 class="fw-bold mb-5">Plats</h2>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             <table class="table table-bordered table-sm">
                                 <thead>
-                                    <th>ID</th>
+                                    <th>N°</th>
                                     <th>Name</th>
                                     <th>Nombres</th>
                                     <th>Action</th>
                                 </thead>
-                                <tbody *ngFor="let plat of plats">
-                                    <td >{{ plat.idPlat }}</td>
-                                    <td >{{ plat.name }}</td>
-                                    <td >{{ plat.number }}</td>
-                                    <td> 
-                                        <a href="#" [routerLink]="['/platliste/', plat.idPlat, 'edit']" class="btn btn-outline-warning">Edit</a>
-                                        <input type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
-                                    </td>
+                                <tbody *ngFor="let plat of plats; let index = index">
+                                    <ng-template [ngIf]="plat.idRestaurant == idCurrentUser || ekalyRole" >
+                                        <td >{{ index + 1}}</td>
+                                        <td >{{ plat.name }}</td>
+                                        <td >{{ plat.number }}</td>
+                                        <td> 
+                                            <a [routerLink]="['/platliste/', plat.idPlat, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                            <input (click)="delete(plat._id)" [routerLink]="['/platliste']" type="button" name="btnDelete"  id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
+                                        </td>
+                                    </ng-template>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="openRegisterModal()" >Nouveau</button>
                         </div>
                     </div>
                 </div>
@@ -44,6 +50,39 @@
 </section>
 <!-- Section: Design Block -->
 
-<!-- Debu: Modal pour la mise à jour des plats-->
+<!-- Debu: Modal pour la création de palt -->
+<div class="modal" tabindex="-1" id="registermodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Insérer le plat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeRegisterModal()"></button>
+        </div>
+        <form [formGroup]="registerForm">
 
-<!-- Fin: Modal pour la mise à jour des plats-->
+             <!-- Name input -->
+             <div class="modal-body">
+                <label class="form-label" for="name">Nom</label>
+                <input formControlName="name" type="text" id="name" class="form-control" />
+            </div>
+            <!-- Number input -->
+            <div class="modal-body">
+                <label class="form-label" for="username">Nombre</label>
+                <input formControlName="number" type="text" id="number" class="form-control" />
+            </div>
+            <!-- Price input -->
+            <div class="modal-body">
+                <label class="form-label" for="email">Prix unitaire</label>
+                <input formControlName="price" type="text" id="price" class="form-control" />
+            </div>
+
+            <!-- Submit button /or cancel -->
+            <div class="modal-footer">            
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="registerForm.invalid" (click)="register()">Enregistrer </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeRegisterModal()" >Annuler</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+<!-- Fin: Modal pour la création de plat -->
