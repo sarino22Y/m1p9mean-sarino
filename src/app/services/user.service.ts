@@ -122,6 +122,49 @@ export class UserService {
     }
   }
 
+  /**
+   * retourner le rôle d'utilisateur connecté.
+   * 
+   */
+   roleOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.role;
+    }
+  }
+
+  
+  /**
+   * retourner le nom d'utilisateur connecté.
+   * 
+   */
+   nameOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.username;
+    }
+  }
+
+  /**
+   * retourner l'id de l'utilisateur connecté.
+   * 
+   */
+   idOfUserConnected():any{
+    if (localStorage.getItem('token')) {
+      var loginToken = localStorage.getItem('token')||'';
+      var extractToken = loginToken.split('.')[1];
+      var atobData = atob(extractToken);
+      var finaldata = JSON.parse(atobData);
+      return finaldata.user_id;
+    }
+  }
+
   // /**
   //  * Modifier la valeur de boolean connected :
   //  * Si true, user connected
@@ -170,34 +213,6 @@ export class UserService {
         catchError(this.errorHandler)
       )
     }
-
-  /**
-   * retourner le nom d'utilisateur connecté.
-   * 
-   */
-   nameOfUserConnected():any{
-    if (localStorage.getItem('token')) {
-      var loginToken = localStorage.getItem('token')||'';
-      var extractToken = loginToken.split('.')[1];
-      var atobData = atob(extractToken);
-      var finaldata = JSON.parse(atobData);
-      return finaldata.username;
-    }
-  }
-
-  /**
-   * retourner l'id de l'utilisateur connecté.
-   * 
-   */
-   idOfUserConnected():any{
-    if (localStorage.getItem('token')) {
-      var loginToken = localStorage.getItem('token')||'';
-      var extractToken = loginToken.split('.')[1];
-      var atobData = atob(extractToken);
-      var finaldata = JSON.parse(atobData);
-      return finaldata.user_id;
-    }
-  }
 
   /**
    * Accès aux données.
