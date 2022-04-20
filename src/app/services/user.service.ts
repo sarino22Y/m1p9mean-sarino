@@ -201,18 +201,18 @@ export class UserService {
       }
   }
 
-   /**
+  /**
    * Obtenir un user par son id.
    * @param id 
    * @returns HttpClient
    */
-    getUserById(id: any): Observable<any>
-    {
-      return this.http.get(this.apiUrl + '/users/' + id) 
-      .pipe(
-        catchError(this.errorHandler)
-      )
-    }
+  getUserById(id: any): Observable<any>
+  {
+    return this.http.get(this.apiUrl + '/users/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
 
   /**
    * Accès aux données.
@@ -295,5 +295,5 @@ export class UserService {
     }
     alert("Une erreur s'est produite, veuillez réessayer ultérieurement.");
     return errorMessage;
-   }
+  }
 }
