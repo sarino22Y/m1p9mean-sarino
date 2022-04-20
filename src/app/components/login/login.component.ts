@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   model!: IUsers;
   title!: string;
   responseData: any;
+  curentRole: any;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
       return;      
     }
     this.model = this.loginForm.value;
+    console.log("MODEL-------", this.model);
     
     this.userService.login(this.model)
     .subscribe({
@@ -65,7 +67,9 @@ export class LoginComponent implements OnInit {
         this.responseData = data;
         localStorage.setItem('token',this.responseData.token.split(' ')[1]);
         this.userService.updateTheMenu.next();
-        this.route.navigate(['']);
+
+        this.curentRole = this.userService.roleOfUserConnected();
+        this.route.navigate([this.curentRole + '/dashboard']);
       },
       error: (e) => {
         console.error("EREURRR",e);
