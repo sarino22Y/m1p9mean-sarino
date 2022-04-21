@@ -22,6 +22,7 @@ export class PlatComponent implements OnInit {
   idPlatById: any;
   idCurrentUser: any;
   ekalyRole: boolean = true;
+  restaurantRole: boolean = true;
 
   constructor(
     private platService:PlatService,
@@ -53,6 +54,8 @@ export class PlatComponent implements OnInit {
     await this.getIdCurrentUser();
 
     await this.isCurrentRoleEkaly();
+
+    await this.isCurrentRoleRestaurant();
   }
 
   /**
@@ -72,6 +75,17 @@ export class PlatComponent implements OnInit {
       return this.ekalyRole = false;
     }
     return this.ekalyRole;
+  }
+
+  /**
+   * Est-ce que le role en cour est 'ekaly'
+   */
+   isCurrentRoleRestaurant(): boolean {
+    let role = this.userService.roleOfUserConnected();
+    if (role != "restaurant" ) {
+      return this.restaurantRole = false;
+    }
+    return this.restaurantRole;
   }
 
   /**
