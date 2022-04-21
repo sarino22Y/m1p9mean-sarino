@@ -34,7 +34,7 @@ export class PlatService {
    * @param id 
    * @returns HttpClient
    */
-  getPlatById(id: number): Observable<any>
+  getPlatById(id: any): Observable<any>
   {
     return this.http.get(this.apiUrl + '/plat/' + id) 
     .pipe(
@@ -55,8 +55,11 @@ export class PlatService {
    * Mise à jour de plat.
    * @return HttpClient
    */
-  update(id:number, plat: any) {
-    return this.http.put(this.apiUrl + '/updateplat/' + id, plat);
+  update(id:any, plat: any) {
+    return this.http.put(this.apiUrl + '/plat/' + id, plat)
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
 
   /**

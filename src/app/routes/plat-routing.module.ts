@@ -6,7 +6,7 @@ import { RoleGuard } from '../shared/auth/role.guard';
 
 const routes: Routes = [
     {path: 'platliste', component: PlatComponent},
-    {path: 'platliste/:platId/edit', component: PlatComponent},
+    {path: 'platliste/:platId', component: PlatComponent},
 
 ]
 

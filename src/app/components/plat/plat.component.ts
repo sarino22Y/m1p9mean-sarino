@@ -15,7 +15,11 @@ export class PlatComponent implements OnInit {
   plats: any;
   registerModal: any;
   registerForm!: FormGroup;
+  updateForm!: FormGroup;
+  updateModal: any;
   model!: IPlats;
+  namePlatById: any;
+  idPlatById: any;
   idCurrentUser: any;
   ekalyRole: boolean = true;
 
@@ -27,15 +31,24 @@ export class PlatComponent implements OnInit {
 
   async ngOnInit() {
     await this.getListePlat();
+    
+    this.updateModal = new window.bootstrap.Modal(
+      document.getElementById("updatemodal")
+    );
 
-    await this.platService.updateThePlats.subscribe( res => {
-      this.createForm();
-    });
-
-    await this.createForm();
     this.registerModal = new window.bootstrap.Modal(
       document.getElementById("registermodal")
     );
+
+    this.platService.updateThePlats.subscribe( res => {
+      this.createForm();
+    });
+    this.createForm();
+
+    this.platService.updateThePlats.subscribe(res => {
+      this.editForm();       
+    });    
+    this.editForm();
 
     await this.getIdCurrentUser();
 
@@ -73,6 +86,17 @@ export class PlatComponent implements OnInit {
   }
 
   /**
+   * Form de update.
+   */
+   editForm() {
+    this.updateForm = this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required])
+    });
+  }
+
+  /**
    * Ouvrir le modal d'insertion de plat.
    */
    openRegisterModal(){
@@ -87,6 +111,20 @@ export class PlatComponent implements OnInit {
   }
 
   /**
+   * Ouvrir le modal de update.
+   */
+  openUpdateModal(){
+    this.updateModal.show();
+  }
+
+  /**
+   * Fermer le modal de register.
+   */
+   closeUpdateModal(){
+    this.updateModal.hide();
+  }
+
+  /**
    * Liste des plats.
    */
   async getListePlat() {
@@ -96,7 +134,26 @@ export class PlatComponent implements OnInit {
     });
   }
 
-   /**
+  /**
+   * Obtenir l'utilisateur par son Id.
+   * @param id 
+   * @returns 
+   */
+  getById(id: any) {
+    return this.platService.getPlatById(new Object(id)).subscribe( res => {
+      this.updateForm = this.formBuilder.group({
+        name: this.formBuilder.control(res[0].name),
+        number: this.formBuilder.control(res[0].number),
+        price: this.formBuilder.control(res[0].price)
+        });
+
+      this.idPlatById = res[0]._id;
+      this.namePlatById = res[0].name;
+    })
+  }
+
+
+  /**
    * Ajouter un plat.
    */
   register() {
@@ -116,6 +173,30 @@ export class PlatComponent implements OnInit {
           console.error(e);
         }
       })
+    }
+  }
+
+  /**
+   * Méthode appellée par le boutton modifier.
+   * Action de form de mise à jour.
+   * @returns 
+   */
+  update(){
+    this.model = this.updateForm.value;
+    console.log("MODEL", this.model);
+    
+    if(confirm("Mettre à jour : " + this.namePlatById)) {
+      this.platService.update(this.idPlatById, this.model)
+      .subscribe({
+        next: ( data ) => {
+          window.location.href= "platliste";
+          console.log("DATA-----",data);
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      })
+      console.log(JSON.stringify(this.updateForm.value));
     }
   }
 
