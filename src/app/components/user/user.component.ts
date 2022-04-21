@@ -75,7 +75,7 @@ export class UserComponent implements OnInit {
   /**
    * Form de register.
    */
-   createForm() {
+  createForm() {
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
@@ -89,7 +89,7 @@ export class UserComponent implements OnInit {
   /**
    * Form de update.
    */
-   editForm() {
+  editForm() {
     this.updateForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
@@ -117,14 +117,14 @@ export class UserComponent implements OnInit {
   /**
    * Ouvrir le modal de update.
    */
-   openUpdateModal(){
+  openUpdateModal(){
     this.updateModal.show();
   }
 
   /**
    * Fermer le modal de register.
    */
-   closeUpdateModal(){
+  closeUpdateModal(){
     this.updateModal.hide();
   }
 
@@ -165,6 +165,11 @@ export class UserComponent implements OnInit {
     });
   }
 
+  /**
+   * Obtenir l'utilisateur par son Id.
+   * @param id 
+   * @returns 
+   */
   getById(id: any) {
     return this.userService.getUserById(new Object(id)).subscribe( res => {
       this.updateForm = this.formBuilder.group({
@@ -184,7 +189,7 @@ export class UserComponent implements OnInit {
   /**
    * Ajouter un utilisateur.
    */
-   register() {
+  register() {
     this.model = this.registerForm.value;
 
     this.model["role"] = this.result;
@@ -202,12 +207,33 @@ export class UserComponent implements OnInit {
         }
       })
     }
-   }
+   }   
 
-   /**
-    * Supprimer un utilisateur.
-    */
-   async delete(idUser:any) {    
+  /**
+   * Méthode appellée par le boutton s'inscrire.
+   * @returns 
+   */
+  update(){
+    this.model = this.updateForm.value;
+    if(confirm("Mettre à jour : " + this.usernameById)) {
+      this.userService.edit(this.idById, this.model)
+      .subscribe({
+        next: ( data ) => {
+          window.location.href= "users/" + this.result;
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      })
+      // console.log(JSON.stringify(this.updateForm.value));
+    }
+  }
+
+  /**
+   * Supprimer un utilisateur.
+   * @param idUser 
+   */
+  async delete(idUser:any) {    
     let name: string;
     this.userService.getUserById( idUser ).subscribe( res => {
       name = res[0].username;
@@ -225,25 +251,5 @@ export class UserComponent implements OnInit {
          })
        }
      });    
-  }
-
-  /**
-   * Méthode appellée par le boutton s'inscrire.
-   * @returns 
-   */
-   update(){
-    this.model = this.updateForm.value;
-    if(confirm("Mettre à jour : " + this.usernameById)) {
-      this.userService.edit(this.idById, this.model)
-      .subscribe({
-        next: ( data ) => {
-          window.location.href= "users/" + this.result;
-        },
-        error: (e) => {
-          console.error(e);
-        }
-      })
-      console.log(JSON.stringify(this.registerForm.value));
-    }
   }
 }
