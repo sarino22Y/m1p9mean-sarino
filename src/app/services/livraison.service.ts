@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,8 +8,13 @@ import { environment } from 'src/environments/environment';
 })
 export class LivraisonService {
   apiUrl: string = environment.apiUrl;
+  private updateLivraisonForm = new Subject<void>();
 
   constructor( private http: HttpClient) { }
+
+  get updateTheLivraison(){
+    return this.updateLivraisonForm;
+  }
 
   /**
    * Retourner la liste de livraison.
@@ -20,17 +25,27 @@ export class LivraisonService {
     return this.http.get(this.apiUrl + '/livraisons')
   }
 
+  
   /**
    * Obtenir un palt.
    * @param id 
    * @returns HttpClient
    */
-  getOne(id: number): Observable<any>
+  getOne(id: any): Observable<any>
   {
     return this.http.get(this.apiUrl + '/livraison/' + id) 
     .pipe(
       catchError(this.errorHandler)
-    )
+      )
+  }
+    
+  /**
+   * Retourner la liste de livraison.
+   * @returns HttpClient
+   */
+  getAllinfo(): Observable<any>
+  {
+    return this.http.get(this.apiUrl + '/livraisoninfos')
   }
 
   /**
@@ -51,6 +66,14 @@ export class LivraisonService {
   }
 
   /**
+   * Mise à jour de livraison.
+   * @return HttpClient
+   */
+   updateInfo(id:number, livraisonInfo: any) {
+    return this.http.put(this.apiUrl + '/livraisoninfo/' + id, livraisonInfo);
+  }
+
+  /**
    * Supprimer un livraison.
    * @param id 
    * @returns 
@@ -58,6 +81,15 @@ export class LivraisonService {
   delete(id:any) 
   {
     return this.http.delete(this.apiUrl + '/livraison/' + id) ;
+  }
+
+  /**
+   * Persister l'information de livraison.
+   * @param data 
+   * @returns HttpClient
+   */
+   createDeliveryInfo(data:any) {
+    return this.http.post(this.apiUrl + '/addlivraisoninfo/', data) ;
   }
 
   /**
