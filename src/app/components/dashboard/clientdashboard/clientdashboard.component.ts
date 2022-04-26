@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Icommande } from 'src/app/models/icommande';
 import { CommandeService } from 'src/app/services/commande.service';
+import { PlatService } from 'src/app/services/plat.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,14 +18,16 @@ export class ClientdashboardComponent implements OnInit {
   nameClientC!: any;
   adressClientC: any;
   mailClientC: any;
-
   nameCurrentClient: any;
-  
+  nbrplats: any;
+  nbrCommande: any;
+
   commandeForm!: FormGroup;
   model!: Icommande;
 
   constructor(
     private commandeService: CommandeService,
+    private platService: PlatService,
     private userService: UserService,
     private formBuilder: FormBuilder
     ) {  
@@ -33,7 +36,8 @@ export class ClientdashboardComponent implements OnInit {
 
   async ngOnInit() {
     this.title = 'Tableau de board';
-    await this.getListeCommande();        
+    await this.getListeCommande();
+    this.getListePlats();       
     this.infoUser();
     this.createForm();
   }
@@ -91,12 +95,31 @@ export class ClientdashboardComponent implements OnInit {
   }
 
   /**
+   * Liste des palts:
+   * - Obtenir le nombre par l'id de restaurant connecté, ...
+   */
+   getListePlats() {
+    return this.platService.getAll().subscribe( res => {
+      let arrayPlat = [];
+      for (let i = 0; i < res["plats"].length; i++) {
+          arrayPlat.push(i);       
+      }      
+      this.nbrplats = arrayPlat.length;
+    })
+  }
+
+  /**
    * Liste des commandes de client connecté.
    */
    async getListeCommande()
    {
      await this.commandeService.getAll().subscribe( res => {
-       this.commandes = res['commandes'];    
+      this.commandes = res['commandes']; 
+      let arrayCommande = [];
+      for (let i = 0; i < res["commandes"].length; i++) {
+        arrayCommande.push(i);       
+      }      
+      this.nbrCommande = arrayCommande.length;   
      });
    }
 

@@ -1,48 +1,56 @@
-<br>
-<!-- Section: Design Block -->
-<section class="text-center">
-    <!-- Background image -->
-    <div class="p-5 bg-image" style="
-          background-image: url('/assets/img/background.jpg');
-          height: 150px;
-          "></div>
-    <!-- Background image -->
-  
-    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
-        margin-top: -100px; 
-        background: hsla(0, 0%, 100%, 0.8);
-        backdrop-filter: blur(30px);">
-        <div class="card-body py-5 px-md-5">  
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="fw-bold mb-5">{{title}}</h2>
-                    <div class="row d-flex justify-content-center">
-                        <h3>Plat à livrer.</h3>
-                        <div class="col-md-12">
-                            <table class="table table-bordered table-sm">
-                                <thead>
-                                    <th>Date</th>
-                                    <th>Nom du plat</th>
-                                    <th>Nombre</th>
-                                    <th>Nom du client</th>
-                                    <th>Addresse du client</th>
-                                    <th>DateLivraison</th>
-                                </thead>
-                                <tbody *ngFor="let livraison of Livraisons">
-                                    <td >{{ livraison.date }}</td>
-                                    <td >{{ livraison.namePlat }}</td>
-                                    <td >{{ livraison.numberPlat }}</td>
-                                    <td >{{ livraison.nameClient }}</td>
-                                    <td >{{ livraison.adressClient }}</td>
-                                    <td >{{ livraison.dateLivraison }}</td>
-                                </tbody>
-                            </table>
-                        </div>
+<section class="content">
+    <div class="container-fluid"> 
+        <div class="row">
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3></h3>
+                        <p>Livraison à faire</p>
                     </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a routerLink="" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <!-- <span>Déjà un compte? <button type="button" class="btn btn-secondary" (click)="moveToLogin()">Se connecter</button></span> -->
             </div>
+
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box  bg-warning">
+                    <div class="inner">
+                        <h3> <!-- <sup style="font-size: 20px">%</sup> -->
+                        </h3>
+                        <p>Livraisons en cours</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a routerLink="" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3> <!-- <sup style="font-size: 20px">%</sup> -->
+                        </h3>
+                        <p>Livraisons terminé</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a routerLink="/" class="small-box-footer">Plus d'information
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </section>
-<!-- Section: Design Block -->
