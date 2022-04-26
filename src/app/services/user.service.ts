@@ -232,6 +232,23 @@ export class UserService {
   }
 
   /**
+   * Accès aux données.
+   * 
+   */
+   isEkalyOrDeliverer(){
+    var loginToken = localStorage.getItem('token')||'';
+    var extractToken = loginToken.split('.')[1];
+    var atobData = atob(extractToken);
+    var finaldata = JSON.parse(atobData);
+    
+    if (finaldata.role == 'ekaly' || finaldata.role == 'deliverer') {
+      return true;
+    }
+    alert("Vous n'avez pas l'autorisation de consulter cette page.")
+    return false;    
+  }
+
+  /**
    * Retourner la liste de restaurant.
    * @returns HttpClient
    */
