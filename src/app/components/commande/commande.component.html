@@ -19,7 +19,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
                             <table class="table table-bordered table-sm">
-                                <thead>
+                                <thead class="thead-light">
                                     <th>Date de commande</th>
                                     <th>Nom du plat</th>
                                     <th>Nom du client</th>
@@ -27,19 +27,22 @@
                                     <th>Email</th>
                                     <th>Nombre commandés</th>
                                     <th>Date de livraison</th>
+                                    <th></th>
                                 </thead>
                                 <tbody *ngFor="let commande of commandes">
-                                    <td >{{ commande.date }}</td>
-                                    <td >{{ commande.namePlat }}</td>
-                                    <td >{{ commande.nameClient }}</td>
-                                    <td >{{ commande.adressClient }}</td>
-                                    <td >{{ commande.mailClient }}</td>
-                                    <td >{{ commande.nombre }}</td>
-                                    <td >{{ commande.dateLivraison }}</td>
-                                    <td> 
-                                        <a [routerLink]="['/commandeliste/', commande.idCommande, 'edit']" class="btn btn-outline-warning">Edit</a>
-                                        <input (click)="infoUser()" type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
-                                    </td>
+                                    <ng-template [ngIf] = "isEqualsIdClients(commande.idClient) || ekalyRole">
+                                        <td >{{ commande.date }}</td>
+                                        <td >{{ commande.namePlat }}</td>
+                                        <td >{{ commande.nameClient }}</td>
+                                        <td >{{ commande.adressClient }}</td>
+                                        <td >{{ commande.emailClient }}</td>
+                                        <td >{{ commande.number }}</td>
+                                        <td >{{ commande.dateLivraison }}</td>
+                                        <td> 
+                                            <a [routerLink]="['/commandeliste/', commande.idCommande, 'edit']" class="btn btn-outline-warning">Edit</a>
+                                            <input (click)="delete(commande._id)" type="button" name="btnDelete" id="btnUpdate" value="Supprimer" class="btn btn-outline-danger">
+                                        </td>
+                                    </ng-template>
                                 </tbody>
                             </table>
                         </div>
@@ -50,12 +53,12 @@
     </div>
 </section>
 <!-- Section: Design Block -->
-
+<!-- 
 <form [formGroup]="commandeForm">
     <input formControlName="namePlat" type="text" class="form-control">
     <input formControlName="nombre" type="number" min="1" class="form-control">
     <input formControlName="dateLivraison" type="date" class="form-control">
 </form>
-<button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button>
+<button (click)="addCommande()" [disabled]="commandeForm.invalid" >tester</button> -->
 
 <br><br>

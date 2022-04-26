@@ -1,8 +1,9 @@
 export interface Icommande {
     namePlat: string,
     nameClient: string,
+    idClient: string,
     adressClient: string,
     emailClient: string,
-    nombre: number,
+    number: number,
     dateLivraison: Date
 }
