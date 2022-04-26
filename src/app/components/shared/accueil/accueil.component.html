@@ -22,16 +22,16 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12">
                             <table class="table table-bordered table-sm">
-                                <thead>
+                                <thead class="thead-light">
                                     <th>Name</th>
                                     <th>Nombres disponibles</th>
-                                    <th *ngIf="displayCommande">Action</th>
+                                    <th *ngIf="displayCommande"></th>
                                 </thead>
                                 <tbody *ngFor="let plat of plats">
                                     <td >{{ plat.name }}</td>
                                     <td >{{ plat.number }}</td>
                                     <td *ngIf="displayCommande"> 
-                                        <a class="btn btn-outline-warning" (click)="openCommandeModal()">Commander</a>                                        
+                                        <a class="btn btn-outline-warning" (click)="openCommandeModal()" (click)="getPlatById(plat._id)" >Commander</a>                                        
                                     </td>
                                 </tbody>
                             </table>
@@ -51,31 +51,30 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Commander de plat.</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeCommandeModal()" ></button>
         </div>
         <form [formGroup]="commandeForm">
             <div class="modal-body">
                 <label for="namePlat">Nom du plat</label>
-                <ng-select formControlName="namePlat" class="namePlat">
+                <input formControlName="namePlat" type="text" id="name" class="form-control" readonly/>
+                <!-- <ng-select formControlName="namePlat" class="namePlat">
                     <ng-option *ngFor="let plat of plats" [value]="plat.name">{{plat.name}}</ng-option>
-                 </ng-select>
+                 </ng-select> -->
             </div>
             <div class="modal-body">
-                <label for="nombre">Nombre à livrer</label>
-                <input formControlName="nombre" min="1" type="number" name="nombre">
+                <label for="number">Nombre à livrer</label>
+                <input formControlName="number" min="1" type="number" name="number">
             </div>
             <div class="modal-body">
                 <label for="dateLivraison">Date de livraison</label>
                 <input formControlName="dateLivraison" type="datetime-local" name="dateLivraison">
             </div>
             <div class="modal-footer">            
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal" [disabled]="commandeForm.invalid" (click)="commander()" >Enregistrer</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" [disabled]="commandeForm.invalid" (click)="closeCommandeModal()" (click)="commander()" >Enregistrer</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeCommandeModal()" >Annuler</button>
             </div>
         </form>
       </div>
     </div>
 </div>
-  
-
 <!-- Fin: Modal pour la commande des plats-->

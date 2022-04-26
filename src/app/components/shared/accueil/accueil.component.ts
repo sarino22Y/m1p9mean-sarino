@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Icommande } from 'src/app/models/icommande';
+import { IDelivery } from 'src/app/models/idelivery';
+import { IDeliveryInfo } from 'src/app/models/ideliveryinfo';
 import { CommandeService } from 'src/app/services/commande.service';
+import { LivraisonService } from 'src/app/services/livraison.service';
 import { PlatService } from 'src/app/services/plat.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,6 +21,8 @@ export class AccueilComponent implements OnInit {
   information: any
 
   plats: any;
+  idPlat: any;
+  namePlat: any;
   commandeModal: any;
  
   displayCommande: any;
@@ -25,6 +30,8 @@ export class AccueilComponent implements OnInit {
 
   commandeForm!: FormGroup;
   model!: Icommande;
+  modelDelivery!: IDelivery;
+  modelDeliveryInfo!: IDeliveryInfo;
   nameClientC: any;
   adressClientC: any;
   mailClientC: any;
@@ -33,6 +40,7 @@ export class AccueilComponent implements OnInit {
     private platListeService: PlatService,
     private userService: UserService,
     private commandeService: CommandeService,
+    private deliveryService: LivraisonService,
     private formBuilder: FormBuilder,
     private route: Router
     ) { }
@@ -66,7 +74,6 @@ export class AccueilComponent implements OnInit {
 
   closeCommandeModal(){
     this.commandeModal.hide();
-    this.route.navigate(['']);
   }
 
   /**
@@ -75,8 +82,20 @@ export class AccueilComponent implements OnInit {
     createForm() {
       this.commandeForm = this.formBuilder.group({
         namePlat: new FormControl('', [Validators.required]),
-        nombre: new FormControl('', [Validators.required]),
+        number: new FormControl('', [Validators.required]),
         dateLivraison: new FormControl('', [Validators.required])
+      });
+    }
+
+    getPlatById(id: any) {
+      return this.platListeService.getPlatById(new Object(id)).subscribe(res => {
+        this.commandeForm =  this.formBuilder.group({
+          namePlat: this.formBuilder.control(res[0].name),
+          number: new FormControl('', [Validators.required]),
+          dateLivraison: new FormControl('', [Validators.required])
+        })
+        this.idPlat = id;
+        this.namePlat = res[0].name;
       });
     }
 
@@ -106,18 +125,59 @@ export class AccueilComponent implements OnInit {
       this.model = this.commandeForm.value;
   
       this.model["nameClient"] = this.nameClientC;
+      this.model["idClient"] = this.idUser();
       this.model["adressClient"] = this.adressClientC;
       this.model["emailClient"] = this.mailClientC;
-      // console.log(this.model);
-      this.commandeService.create(this.model)
-      .subscribe({
-        next: ( data ) => {
-          console.log("DATA--------------------",data);
-        },
-        error: (e) => {
-          console.error(e);
-        }
-      })
+      console.log("MODEL TY", this.model);
+      if (confirm("Confirmer la commande")) { 
+        this.commandeService.create(this.model)
+        .subscribe({
+          next: ( data: any ) => {
+            console.log("DATA COMMANDE nuber--------------------",data["commandes"].number);
+            console.log("DATA COMMANDE --------------------",data);
+
+            this.modelDelivery = {
+              idPlat: this.idPlat,
+              idCommande: data["commandes"]._id,
+              number: data["commandes"].number,
+              dateLivraison: data["commandes"].dateLivraison,
+              statusLivraison: "pending"
+            };            
+
+            this.deliveryService.create(this.modelDelivery).subscribe({
+              next: (dataDelivery: any) => {
+                console.log("DATA LIVRAISON------------ ", dataDelivery);
+
+                this.modelDeliveryInfo = {
+                  idLivraison: dataDelivery["livraison"]._id,
+                  idDeliverer: "",
+                  plat: this.namePlat,
+                  dateLivraison: data["commandes"].dateLivraison,
+                  status: "pending",
+                  number: data["commandes"].number,
+                  client: '('+ this.nameClientC +', '+ this.mailClientC +', '+ this.adressClientC + ')'
+                };
+
+                this.deliveryService.createDeliveryInfo(this.modelDeliveryInfo).subscribe({
+                  next: (dataDeliveryinfo) => {
+                    console.log("DATA INFORMATION LIVRAISON------------ ", dataDeliveryinfo);                
+                  },
+                  error: (err) => {
+                    console.error(err);                
+                  }
+                });
+                             
+              },
+              error: (err) => {
+                console.error(err);                
+              }
+            });            
+          },
+          error: (e) => {
+            console.error(e);
+          }
+        })
+      }
      }
 
   /**
