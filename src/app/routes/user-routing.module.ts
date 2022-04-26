@@ -3,7 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 
 import { RegisterComponent } from '../components/register/register.component';
 import { LoginComponent } from '../components/login/login.component';
-import { RoleGuard } from '../shared/auth/role.guard';
+import { RoleGuard } from '../shared/acces/role.guard';
 import { UserComponent } from '../components/user/user.component';
 import { RegisterekalyComponent } from '../components/register/registerekaly/registerekaly.component';
 import { RegisterrestaurantComponent } from '../components/register/registerrestaurant/registerrestaurant.component';

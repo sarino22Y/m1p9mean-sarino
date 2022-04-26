@@ -5,7 +5,7 @@ import { ClientdashboardComponent } from '../components/dashboard/clientdashboar
 import { RestaurantdashboardComponent } from '../components/dashboard/restaurantdashboard/restaurantdashboard.component';
 import { DelivererdashboardComponent } from '../components/dashboard/delivererdashboard/delivererdashboard.component';
 import { EkalydashboardComponent } from '../components/dashboard/ekalydashboard/ekalydashboard.component';
-import { RoleGuard } from '../shared/auth/role.guard';
+import { RoleGuard } from '../shared/acces/role.guard';
 
 const routes: Routes = [
     {path: 'client/dashboard', component: ClientdashboardComponent},
