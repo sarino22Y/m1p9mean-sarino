@@ -7,10 +7,12 @@ import { UserService } from 'src/app/services/user.service';
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
+  
   constructor(
     private service: UserService,
     private route: Router
   ){}
+
   canActivate(){
     if (this.service.haveAcces()) {
       return true;
