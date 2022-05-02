@@ -114,12 +114,15 @@ export class ClientdashboardComponent implements OnInit {
    async getListeCommande()
    {
      await this.commandeService.getAll().subscribe( res => {
-      this.commandes = res['commandes']; 
+      this.commandes = res['commandes'];
       let arrayCommande = [];
       for (let i = 0; i < res["commandes"].length; i++) {
-        arrayCommande.push(i);       
-      }      
-      this.nbrCommande = arrayCommande.length;   
+        if (this.commandes[i].idClient == this.idUser() ) {          
+          arrayCommande.push(i);
+        }
+      }
+      this.nbrCommande = arrayCommande.length;
+      console.log('Nombre de commande', this.nbrCommande);
      });
    }
 
