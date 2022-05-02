@@ -1,0 +1,92 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background-image: url('/assets/img/background.jpg');
+        height: 200px;">
+    </div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px; 
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);">
+        <div class="card-body py-5 px-md-5">
+  
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-12">
+                    <h2 class="fw-bold mb-5">Livraisons</h2>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-sm">
+                                <thead class="thead-light">
+                                    <th>Plat</th>
+                                    <th>Nombre</th>
+                                    <th>Date de livraison</th>
+                                    <th>Client</th>
+                                    <th>Livreur</th>
+                                    <th>Etat de livraison</th>
+                                    <th></th>
+                                </thead>
+                                <tbody *ngFor="let livraison of livraisons">
+                                    <ng-template [ngIf]="isEqualsIdDeliverer(livraison.idDeliverer, livraison.status)" >
+                                        <td >{{ livraison.plat }}</td>
+                                        <td >{{ livraison.number }}</td>
+                                        <td >{{ livraison.dateLivraison }}</td>
+                                        <td >{{ livraison.client }}</td>
+                                        <td >{{ livraison.idDeliverer }}</td>
+                                        <td >{{ changeStatusInFrench(livraison.status) }}</td>
+                                        <td>
+                                            <a *ngIf="delivererRole" (click)="getById(livraison._id, livraison.idLivraison)" (click)="openUpdateModal()" class="btn btn-outline-warning">Edit</a>
+                                            <input (click)="delete(livraison._id)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
+                                        </td>
+                                    </ng-template>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+
+<!-- Debu: Modal pour la mise à jour de livraison'-->
+<div class="modal" tabindex="-1" id="updatemodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Mise à jour de <i class="fas fa-plane-alt    "></i>.</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeUpdateModal()"></button>
+        </div>
+        <form [formGroup]="updateForm">
+
+            <!-- Deliverer name input -->
+            <div class="modal-body">
+                <label class="form-label" for="name">Nom de livreur</label>
+                <!-- <input formControlName="idDeliverer" type="text" id="name" class="form-control" /> -->
+                <ng-select formControlName="status" class="idDeliverer">
+                    <ng-option *ngFor="let stat of status" [value]="stat.name">
+                            {{stat.nameFr}}
+                    </ng-option>
+                 </ng-select>
+            </div>
+
+            <!-- Deliverer name input
+            <div class="modal-body">
+                 <input formControlName="idDeliverer" type="text" id="name" class="form-control" /> 
+                <input type="checkbox" name="" id="" value="doing">
+                <label class="form-label" for="name"> Fait</label>
+            </div> -->
+
+            <!-- Submit button /or cancel -->
+            <div class="modal-footer">            
+                <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="updateForm.invalid" (click)="closeUpdateModal()" (click)="updateLivraison()">OK </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeUpdateModal()" >Annuler</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+<!-- Fin: Modal pour la mise à jour d'utilisateur-->
