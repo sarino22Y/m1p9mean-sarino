@@ -1,51 +1,36 @@
 <section class="content">
     <div class="container-fluid"> 
         <div class="row">
-            <div class="col-lg-4 col-6">
 
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3></h3>
-                        <p>Livraison à faire</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a routerLink="" class="small-box-footer">Plus d'information
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-6">
-
+            <div class="col-lg-6">
                 <div class="small-box  bg-warning">
                     <div class="inner">
                         <h3> <!-- <sup style="font-size: 20px">%</sup> -->
+                            {{ nbrDoing }}
                         </h3>
                         <p>Livraisons en cours</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a routerLink="" class="small-box-footer">Plus d'information
+                    <a routerLink="/livraisons/doing" class="small-box-footer">Plus d'information
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-6">
-
+            <div class="col-lg-6">
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3> <!-- <sup style="font-size: 20px">%</sup> -->
+                            {{ nbrDone }}
                         </h3>
                         <p>Livraisons terminé</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a routerLink="/" class="small-box-footer">Plus d'information
+                    <a routerLink="/livraisons/done" class="small-box-footer">Plus d'information
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
