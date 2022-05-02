@@ -148,22 +148,23 @@ export class DonedeliveryComponent implements OnInit {
   /**
    * Supprimmer une livaraison
    */
-  async delete(idDelivery: any) {
+  async delete(idDeliveryInfo: any, idDelivery: any) {
     let name: string;
     this.livraisonService.getOne(idDelivery).subscribe( res => {
 
     if (confirm("Supprimmer la livraison")) {     
-      alert("Pas disponible pour l'instant, réessayer plus tars.")  
-      // this.livraisonService.delete(idDelivery).subscribe({
-      //   next: ( data ) => {
-      //     window.location.href= "/livraisons";
-      //     console.log("DATA-----",data);
-      //   },
-      //   error: (e) => {
-      //     alert("Une erreur s'est produite. Veuillez réessayer plus tard.")
-      //     console.error(e);
-      //   }
-      // })
+      // alert("Pas disponible pour l'instant, réessayer plus tars.")  
+      this.livraisonService.deleteInfo(idDeliveryInfo).subscribe({
+        next: ( data ) => {
+          window.location.href= "/livraisons/done";
+          console.log("DATA-----",data);
+          this.livraisonService.delete(idDelivery).subscribe()
+        },
+        error: (e) => {
+          alert("Une erreur s'est produite. Veuillez réessayer plus tard.")
+          console.error(e);
+        }
+      })
     }
   }); 
   }

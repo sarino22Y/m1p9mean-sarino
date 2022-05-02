@@ -35,7 +35,7 @@
                                         <td >{{ livraison.client }}</td>
                                         <td >{{ changeStatusInFrench(livraison.status) }}</td>
                                         <td>
-                                            <input (click)="delete(livraison._id)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
+                                            <input (click)="delete(livraison._id, livraison.idLivraison)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
                                         </td>
                                     </ng-template>                                    
                                 </tbody>
