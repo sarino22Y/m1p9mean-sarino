@@ -51,29 +51,31 @@
                         <p>Vendus</p>
                     </a>
                 </li>
-                <li class="nav-header">LIVRAISONS</li>
-                <li class="nav-item">
-                    <a routerLink="livraisons" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Tous les livraisons</p>
+                <li class="nav-header">
+                    <a routerLink="livraisons">
+                        LIVRAISONS
                     </a>
-                    <a routerLink="livraisons" class="nav-link">
+                </li>
+                <li class="nav-item">
+                    <a routerLink="livraisons/pending" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>En attente</p>
+                    </a>
+                    <a routerLink="livraisons/doing" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>En cours</p>
                     </a>
-                    <a routerLink="livraisons" class="nav-link">
+                    <a routerLink="livraisons/done" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Livrés</p>
                     </a> 
                 </li>
                 <li class="nav-header">UTILISATEURS</li>
                 <li class="nav-item">   
-                    <a class="nav-link">
+                    <a class="nav-link" routerLink="users/all">
                         <i class="nav-icon fas fa-book"></i>
-                        <p>
-                            Profile
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
+                        <p>Profile</p>
+                        <i class="fas fa-angle-left right"></i>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
@@ -129,13 +131,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
-                        <p>Plats commandés</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="/platliste/sold" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>Plats vendus</p>
                     </a>
@@ -184,17 +180,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">LIVRAISONS</li>
                 <li class="nav-item">
-                    <a routerLink=""class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
-                        <p>Tous les plats</p>
+                    <a routerLink="livraisons/doing" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>En cours</p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="livraisoninfo" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
-                        <p>Plats à livrer</p>
-                    </a>
+                    <a routerLink="livraisons/done" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Livrés</p>
+                    </a> 
                 </li>
             </ul>
             <!-- FIN: Menu LIVREURS -->
