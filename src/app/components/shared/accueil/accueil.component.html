@@ -30,7 +30,7 @@
                                 <tbody *ngFor="let plat of plats">
                                     <ng-template  [ngIf]="plat.numberRemain != 0">
                                         <td >{{ plat.name }}</td>
-                                        <td >{{ plat.number }}</td>
+                                        <td >{{ plat.numberRemain }}</td>
                                         <td *ngIf="displayCommande">
                                             <a class="btn btn-outline-warning" (click)="openCommandeModal()" (click)="getPlatById(plat._id)" >Commander</a>                                        
                                         </td>

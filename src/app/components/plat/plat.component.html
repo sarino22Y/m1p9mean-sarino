@@ -23,6 +23,8 @@
                                     <th>N°</th>
                                     <th>Name</th>
                                     <th>Nombres</th>
+                                    <th>Vendu</th>
+                                    <th>Reste</th>
                                     <th>Prix unitaire</th>
                                     <th *ngIf="restaurantRole"></th>
                                 </thead>
@@ -31,6 +33,8 @@
                                         <td ></td>
                                         <td >{{ plat.name }}</td>
                                         <td >{{ plat.number }}</td>
+                                        <td >{{ plat.numberSold }}</td>
+                                        <td >{{ plat.numberRemain }}</td>
                                         <td >{{ plat.price }}</td>
                                         <td *ngIf="restaurantRole"> 
                                             <a (click)="getById(plat._id)" class="btn btn-outline-warning" (click)="openUpdateModal()">Modifier</a>
