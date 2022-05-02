@@ -3,5 +3,5 @@ export interface IDelivery {
     idCommande: string,
     dateLivraison: string,
     number: number,
-    statusLivraison: string
+    status: string
 }

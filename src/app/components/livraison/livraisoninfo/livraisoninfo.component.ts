@@ -41,7 +41,7 @@ export class LivraisoninfoComponent implements OnInit {
   async getListeLivraison()
   {
     await this.livraisonService.getAllinfo().subscribe( res => {
-      this.livraisons = res['livraisons'];
+      this.livraisons = res['livraisoninfos'];
       console.log(this.livraisons);
     });
   }
