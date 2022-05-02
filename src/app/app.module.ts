@@ -36,6 +36,11 @@ import { DashboardRoutingModule } from './routes/dashboard-routing.module';
 import { MenusComponent } from './components/shared/menus/menus.component';
 import { EkalydashboardComponent } from './components/dashboard/ekalydashboard/ekalydashboard.component';
 import { LivraisoninfoComponent } from './components/livraison/livraisoninfo/livraisoninfo.component';
+import { PendingdeliveryComponent } from './components/livraison/pendingdelivery/pendingdelivery.component';
+import { DoingdeliveryComponent } from './components/livraison/doingdelivery/doingdelivery.component';
+import { DonedeliveryComponent } from './components/livraison/donedelivery/donedelivery.component';
+import { PlatRemainsComponent } from './components/plat/plat-remains/plat-remains.component';
+import { PlatSoldComponent } from './components/plat/plat-sold/plat-sold.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +64,12 @@ import { LivraisoninfoComponent } from './components/livraison/livraisoninfo/liv
     RestaurantdashboardComponent,
     DelivererdashboardComponent,
     EkalydashboardComponent,
-    LivraisoninfoComponent
+    LivraisoninfoComponent,
+    PendingdeliveryComponent,
+    DoingdeliveryComponent,
+    DonedeliveryComponent,
+    PlatRemainsComponent,
+    PlatSoldComponent
   ],
   imports: [
     BrowserModule,
