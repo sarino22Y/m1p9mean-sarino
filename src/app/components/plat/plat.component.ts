@@ -144,7 +144,6 @@ export class PlatComponent implements OnInit {
   async getListePlat() {
     await this.platService.getAll().subscribe( res => {
       this.plats = res['plats'];
-      console.log('ITYYYYYYYYYYYYYYYY',this.plats);
     });
   }
 
@@ -165,7 +164,6 @@ export class PlatComponent implements OnInit {
       this.namePlatById = res[0].name;
     })
   }
-
 
   /**
    * Ajouter un plat.
@@ -215,7 +213,7 @@ export class PlatComponent implements OnInit {
   }
 
   /**
-    * Supprimer un utilisateur.
+    * Supprimer un plat.
     */
   async delete(idPlat:any) {    
     let name: string;

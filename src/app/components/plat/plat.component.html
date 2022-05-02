@@ -24,7 +24,7 @@
                                     <th>Name</th>
                                     <th>Nombres</th>
                                     <th>Prix unitaire</th>
-                                    <th *ngIf="restaurantRole">Action</th>
+                                    <th *ngIf="restaurantRole"></th>
                                 </thead>
                                 <tbody *ngFor="let plat of plats; let index = index">
                                     <ng-template [ngIf]="plat.idRestaurant == idCurrentUser || ekalyRole" >
