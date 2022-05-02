@@ -61,15 +61,15 @@ export class LivraisonService {
    * Mise à jour de livraison.
    * @return HttpClient
    */
-  update(id:number, livraison: any) {
-    return this.http.put(this.apiUrl + '/updatelivraison/' + id, livraison);
+  update(id: any, livraison: any) {
+    return this.http.put(this.apiUrl + '/livraison/' + id, livraison);
   }
 
   /**
    * Mise à jour de livraison.
    * @return HttpClient
    */
-   updateInfo(id:number, livraisonInfo: any) {
+   updateInfo(id:any, livraisonInfo: any) {
     return this.http.put(this.apiUrl + '/livraisoninfo/' + id, livraisonInfo);
   }
 
