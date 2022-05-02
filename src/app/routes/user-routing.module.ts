@@ -17,7 +17,7 @@ const routes: Routes = [
     {path: 'user/registerdeliverer', component: RegisterdelivererComponent},
     {path: 'user/login', component: LoginComponent},
     {path: 'user/logout', component: LoginComponent},
-    {path: 'users', component: UserComponent,canActivate:[RoleGuard]},
+    {path: 'users/all', component: UserComponent,canActivate:[RoleGuard]},
     {path: 'users/ekaly', component: UserComponent,canActivate:[RoleGuard]},
     {path: 'users/restaurant', component: UserComponent,canActivate:[RoleGuard, AuthGuard]},
     {path: 'users/client', component: UserComponent,canActivate:[RoleGuard]},

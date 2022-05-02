@@ -43,15 +43,13 @@ export class UserComponent implements OnInit {
 
   async ngOnInit() {
     let resultRoute = this.route.split("/");
-    this.result = resultRoute[2].toString();
+    this.result = (resultRoute[2].toString() ? resultRoute[2].toString() : null);
 
     await this.getListeUser();
 
     this.registerModal = new window.bootstrap.Modal(
       document.getElementById("registermodal")
     );
-
-    
     this.updateModal = new window.bootstrap.Modal(
       document.getElementById("updatemodal")
     );
@@ -70,6 +68,8 @@ export class UserComponent implements OnInit {
       this.displayButtonToCurrentUser();
     });    
     this.displayButtonToCurrentUser();
+
+    this.isResultRouteNull();
   }
 
   /**
@@ -141,6 +141,17 @@ export class UserComponent implements OnInit {
       return false;
     }
     
+  }
+
+  /**
+   * Si le resultat de route est null alors,
+   * la liste de tous les utilisateur doit affichée.
+   */
+  isResultRouteNull(): any{
+    if (this.result == "all") {
+      console.log('result route est ---', this.result );
+      return true;
+    }
   }
 
   displayButtonToCurrentUser() {

@@ -28,7 +28,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody *ngFor="let user of users">
-                                    <ng-template [ngIf] = "IsRoleIncludeInUser(user.role)">
+                                    <ng-template [ngIf] = "IsRoleIncludeInUser(user.role) || isResultRouteNull()">
                                         <td >{{ user.name }}</td>
                                         <td >{{ user.username }}</td>
                                         <td >{{ user.role }}</td>
