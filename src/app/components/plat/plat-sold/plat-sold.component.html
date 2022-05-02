@@ -21,7 +21,7 @@
                             <table class="table table-bordered table-sm">
                                 <thead class="thead-light">
                                     <th>Name</th>
-                                    <th>Nombres</th>
+                                    <th>Nombres vendu</th>
                                     <th>Date</th>
                                     <!-- <th>Prix unitaire</th> -->
                                     <th></th>
@@ -29,7 +29,7 @@
                                 <tbody *ngFor="let plat of plats">
                                     <ng-template [ngIf]="plat.idRestaurant == idCurrentUser || ekalyRole " >
                                         <td >{{ plat.name }}</td>
-                                        <td >{{ plat.number }}</td>
+                                        <td >{{ plat.numberSold }}</td>
                                         <td >{{ plat.dateLivraison }}</td>
                                         <!-- <td >{{ plat.price }}</td> -->
                                         <td>

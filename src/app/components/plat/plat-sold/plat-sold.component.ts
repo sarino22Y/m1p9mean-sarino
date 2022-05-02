@@ -60,10 +60,14 @@ export class PlatSoldComponent implements OnInit {
               platsSold[j].dateLivraison = res.livraisons[j].dateLivraison;
             }     
           }
+        }       
+        for (let k = 0; k < platsSold.length; k++) {
+          const element = platsSold[k];
+          if (element) {           
+            this.plats.push(element);
+          }
         }
-
-       this.plats = platsSold;
-        
+        console.log("Les plats vendus ", this.plats);
       })
     });
   }
