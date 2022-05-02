@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container-fluid"> 
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4">
 
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -11,46 +11,31 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a routerLink="" class="small-box-footer">Plus d'information
+                    <a routerLink="/platliste" class="small-box-footer">Plus d'information
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4">
 
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3> <!-- <sup style="font-size: 20px">%</sup> -->
+                            {{ nbrplatsSold }}
                         </h3>
                         <p>Plats vendus</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a routerLink="/users/client" class="small-box-footer">Plus d'information
+                    <a routerLink="/platliste/sold" class="small-box-footer">Plus d'information
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-6">
-
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3></h3>
-                        <p>Reste des plats</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    <a routerLink="/users/restaurant" class="small-box-footer">Plus d'information
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4">
 
                 <div class="small-box bg-danger">
                     <div class="inner">
