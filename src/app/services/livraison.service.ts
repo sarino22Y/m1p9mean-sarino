@@ -74,7 +74,7 @@ export class LivraisonService {
   }
 
   /**
-   * Supprimer un livraison.
+   * Supprimer une livraison.
    * @param id 
    * @returns 
    */
@@ -82,6 +82,16 @@ export class LivraisonService {
   {
     return this.http.delete(this.apiUrl + '/livraison/' + id) ;
   }
+
+  /**
+   * Supprimer l'information d'une livraison.
+   * @param id 
+   * @returns 
+   */
+   deleteInfo(id:any) 
+   {
+     return this.http.delete(this.apiUrl + '/livraisoninfo/' + id) ;
+   }
 
   /**
    * Persister l'information de livraison.

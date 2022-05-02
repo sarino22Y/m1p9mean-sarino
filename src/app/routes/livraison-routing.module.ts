@@ -14,7 +14,7 @@ const routes: Routes = [
     {path: 'livraisons/doing', component: DoingdeliveryComponent,canActivate:[LivraisonGuard]},
     {path: 'livraisons/done', component: DonedeliveryComponent,canActivate:[LivraisonGuard]},
     {path: 'livraisoninfo', component: LivraisoninfoComponent,canActivate:[LivraisonGuard]},
-    {path: 'livraisons', component: LivraisonComponent,canActivate:[LivraisonGuard]},
+    {path: 'livraisons', component: LivraisonComponent,canActivate:[RoleGuard]},
     {path: 'livraisons/:idlivraison', component: LivraisonComponent,canActivate:[LivraisonGuard]}
 ]
 
