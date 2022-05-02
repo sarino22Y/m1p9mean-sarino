@@ -43,6 +43,7 @@ export class LivraisonComponent implements OnInit {
       this.editForm();       
     });  
     this. editForm();
+    this.idUser();
   }
 
   /**
@@ -69,6 +70,55 @@ export class LivraisonComponent implements OnInit {
       idDeliverer: new FormControl('', [Validators.required])
     });
   }
+
+  /**
+   * Est-ce que le role en cour est 'ekaly'
+   */
+   isCurrentRoleEkaly(): boolean {
+    let role = this.userService.roleOfUserConnected();
+    if (role != "ekaly" ) {
+      return this.ekalyRole = false;
+    }
+    return this.ekalyRole;
+  }
+
+  /**
+   * Traduire en fraçais le status
+   * @param status 
+   * @returns 
+   */
+  changeStatusInFrench(status: string): any {
+    if (status == "pending") {
+      return "En entante";
+    }
+
+    if (status == "doing") {
+      return "En cours";
+    }
+
+    if (status == "done") {
+      return "Terminé";
+    }
+  }
+
+  // Id d'utilisateur connecté.
+  idUser():any{
+    return this.userService.idOfUserConnected();
+  }
+
+  /**
+   * Afficher la livraisons en fonction de livreur.
+   * @param id 
+   * @returns 
+   */
+  isEqualsIdDeliverer(id: any, status: any): boolean {
+    if (id == this.idUser() || status == 'pending') {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   /**
    * Obtenir l'id de livraison.
@@ -113,17 +163,6 @@ export class LivraisonComponent implements OnInit {
   }
 
   /**
-   * Est-ce que le role en cour est 'ekaly'
-   */
-   isCurrentRoleEkaly(): boolean {
-    let role = this.userService.roleOfUserConnected();
-    if (role != "ekaly" ) {
-      return this.ekalyRole = false;
-    }
-    return this.ekalyRole;
-  }
-
-  /**
    * Liste des livraisons.
    */
   async getListeLivraison()
@@ -163,25 +202,6 @@ export class LivraisonComponent implements OnInit {
       
       return res
     })
-  }
-
-  /**
-   * Traduire en fraçais le status
-   * @param status 
-   * @returns 
-   */
-  changeStatusInFrench(status: string): any {
-    if (status == "pending") {
-      return "En entante";
-    }
-
-    if (status == "doing") {
-      return "En cours";
-    }
-
-    if (status == "done") {
-      return "Terminé";
-    }
   }
 
   async getNamePlatById(idPlat: any) {

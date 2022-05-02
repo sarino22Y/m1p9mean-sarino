@@ -28,15 +28,17 @@
                                     <th></th>
                                 </thead>
                                 <tbody *ngFor="let livraison of livraisons">
-                                    <td >{{ livraison.plat }}</td>
-                                    <td >{{ livraison.number }}</td>
-                                    <td >{{ livraison.dateLivraison }}</td>
-                                    <td >{{ livraison.client }}</td>
-                                    <td >{{ livraison.status }}</td>
-                                    <td>
-                                        <a (click)="getById(livraison.idLivraison, livraison._id)" (click)="openUpdateModal()" class="btn btn-outline-warning">Edit</a>
-                                        <input (click)="delete(livraison._id)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
-                                    </td>
+                                    <ng-template [ngIf]="isEqualsIdDeliverer(livraison.idDeliverer, livraison.status) || ekalyRole" >
+                                        <td >{{ livraison.plat }}</td>
+                                        <td >{{ livraison.number }}</td>
+                                        <td >{{ livraison.dateLivraison }}</td>
+                                        <td >{{ livraison.client }}</td>
+                                        <td >{{ changeStatusInFrench(livraison.status) }}</td>
+                                        <td>
+                                            <a (click)="getById(livraison.idLivraison, livraison._id)" (click)="openUpdateModal()" class="btn btn-outline-warning">Edit</a>
+                                            <input (click)="delete(livraison._id)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
+                                        </td>
+                                    </ng-template>                                    
                                 </tbody>
                             </table>
                         </div>
