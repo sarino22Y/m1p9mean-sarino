@@ -23,6 +23,7 @@ export class AccueilComponent implements OnInit {
   plats: any;
   idPlat: any;
   namePlat: any;
+  platNumber: any;
   commandeModal: any;
  
   displayCommande: any;
@@ -96,6 +97,9 @@ export class AccueilComponent implements OnInit {
         })
         this.idPlat = id;
         this.namePlat = res[0].name;
+        this.platNumber = res[0].numberRemain;
+        console.log("Nombre de plat est ", res[0].numberRemain);
+        
       });
     }
 
@@ -128,20 +132,40 @@ export class AccueilComponent implements OnInit {
       this.model["idClient"] = this.idUser();
       this.model["adressClient"] = this.adressClientC;
       this.model["emailClient"] = this.mailClientC;
-      console.log("MODEL TY", this.model);
+      let number = {
+        numberSold: (this.model.number),
+        numberRemain: (this.platNumber - this.model.number),
+      };
+      console.log("MODEL TY", number);
       if (confirm("Confirmer la commande")) { 
         this.commandeService.create(this.model)
         .subscribe({
           next: ( data: any ) => {
+            alert("Commade terminé avec succès.");
             console.log("DATA COMMANDE nuber--------------------",data["commandes"].number);
             console.log("DATA COMMANDE --------------------",data);
+
+            // Mettre à jour le nombre restant du plats.
+            let number = {
+              numberSold: (data["commandes"].number),
+              numberRemain: (this.platNumber - data["commandes"].number),
+            };
+
+            this.platListeService.update(this.idPlat, number).subscribe({
+              next: (dataPlat: any) => {
+                console.log("DATA PLATS------------ ", dataPlat);
+              },
+              error: (errPlat) => {
+                console.error("ERREUR MISE A JOUR NOMBRE DE PLAT ", errPlat);                
+              }
+            })
 
             this.modelDelivery = {
               idPlat: this.idPlat,
               idCommande: data["commandes"]._id,
               number: data["commandes"].number,
               dateLivraison: data["commandes"].dateLivraison,
-              statusLivraison: "pending"
+              status: "pending"
             };            
 
             this.deliveryService.create(this.modelDelivery).subscribe({
@@ -157,13 +181,15 @@ export class AccueilComponent implements OnInit {
                   number: data["commandes"].number,
                   client: '('+ this.nameClientC +', '+ this.mailClientC +', '+ this.adressClientC + ')'
                 };
+                console.log("DATA INFORMATION LIVRAISON------------ ", this.modelDeliveryInfo); 
 
                 this.deliveryService.createDeliveryInfo(this.modelDeliveryInfo).subscribe({
                   next: (dataDeliveryinfo) => {
-                    console.log("DATA INFORMATION LIVRAISON------------ ", dataDeliveryinfo);                
+                    console.log("DATA INFORMATION LIVRAISON AFTER SUCCES------------ ", dataDeliveryinfo);
+                    window.location.href= "commandeliste";
                   },
                   error: (err) => {
-                    console.error(err);                
+                    console.error("ERREUR INFORMATION LIVRAISON ",err);                
                   }
                 });
                              

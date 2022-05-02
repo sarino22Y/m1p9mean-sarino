@@ -28,11 +28,13 @@
                                     <th *ngIf="displayCommande"></th>
                                 </thead>
                                 <tbody *ngFor="let plat of plats">
-                                    <td >{{ plat.name }}</td>
-                                    <td >{{ plat.number }}</td>
-                                    <td *ngIf="displayCommande"> 
-                                        <a class="btn btn-outline-warning" (click)="openCommandeModal()" (click)="getPlatById(plat._id)" >Commander</a>                                        
-                                    </td>
+                                    <ng-template  [ngIf]="plat.numberRemain != 0">
+                                        <td >{{ plat.name }}</td>
+                                        <td >{{ plat.number }}</td>
+                                        <td *ngIf="displayCommande">
+                                            <a class="btn btn-outline-warning" (click)="openCommandeModal()" (click)="getPlatById(plat._id)" >Commander</a>                                        
+                                        </td>
+                                    </ng-template>
                                 </tbody>
                             </table>
                         </div>
@@ -63,7 +65,7 @@
             </div>
             <div class="modal-body">
                 <label for="number">Nombre à livrer</label>
-                <input formControlName="number" min="1" type="number" name="number">
+                <input formControlName="number" min="1" max="{{platNumber}}" type="number" name="number">
             </div>
             <div class="modal-body">
                 <label for="dateLivraison">Date de livraison</label>
