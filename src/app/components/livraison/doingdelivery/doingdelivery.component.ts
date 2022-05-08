@@ -14,18 +14,21 @@ declare var window: any;
 })
 export class DoingdeliveryComponent implements OnInit {
 
-  livraisons: any;
-  plats: any;
-  ekalyRole: boolean = true;
-  delivererRole: boolean = true;
-  modelLivraisonInfo!: IDeliveryInfo;
-  updateModal: any;
-  updateForm!: FormGroup;
   idLivraisonInfo: any;
   idLivraison: any;
   idDeliverer: any;
-  deliverers: any;
+  idPlat: any;
+  dateSoldPlat: any;
+  profitPlat: number = 0;
+  livraisons: any;
+  plats: any;
   status: any;
+  deliverers: any;
+  modelLivraisonInfo!: IDeliveryInfo;
+  ekalyRole: boolean = true;
+  delivererRole: boolean = true;
+  updateModal: any;
+  updateForm!: FormGroup;
 
   constructor(
     private livraisonService:LivraisonService,
@@ -184,16 +187,43 @@ export class DoingdeliveryComponent implements OnInit {
   }
 
   /**
-   * l'id de livraison.
+   * Obtenir l'information de livraison
    */
-   getById(id: any, idLivraison: any) {
-    this.idLivraisonInfo = id;
-    this.idLivraison = idLivraison;
-   }
+  getById(livraison: any) {
+     console.log(livraison);
+     
+    this.idLivraisonInfo = livraison._id;
+    this.idLivraison = livraison.idLivraison;
+    this.dateSoldPlat = livraison.dateLivraison;
+
+    console.log("ID LIVRAISON", this.idLivraison);
+    
+    
+    this.getLivraisonById();
+  }
+
+  getLivraisonById() {
+    this.livraisonService.getOne(this.idLivraison).subscribe( res => {
+      this.idPlat = res[0].idPlat;
+      console.log("RESULTAT ID PLAT", this.idPlat);
+
+      // TODO: profit = soldPrice - expense (Dépense)
+      this.platService.getPlatById(this.idPlat).subscribe( resPlat =>{
+        this.profitPlat = parseInt(resPlat[0].price)
+      });
+    });
+  }
 
   updateLivraison(){
     this.modelLivraisonInfo = this.updateForm.value;
-    console.log("MODEL LIVRAISON", this.modelLivraisonInfo);
+
+    let dataPlatLivraison = {
+      idPlat: this.idPlat,
+      idDelivery: this.idLivraison,
+      profit: this.profitPlat,
+      dateSold: this.dateSoldPlat
+    };
+    console.log("Ass plat livraison", dataPlatLivraison);
     
     if(confirm("La livraison est terminée." )) {
       this.livraisonService.updateInfo(this.idLivraisonInfo, this.modelLivraisonInfo)
@@ -205,7 +235,15 @@ export class DoingdeliveryComponent implements OnInit {
           .subscribe({
             next: (data2) => {
               console.log("Succés", data2);
-              window.location.href= "livraisons/done";
+              this.platService.createPlatDelivery(dataPlatLivraison).subscribe({
+                next: ( dataplatDelivery ) => {
+                  console.log("Création avec succès de l'association Plat/Livraison", dataplatDelivery);
+                  window.location.href= "livraisons/done";
+                },
+                error: (errorPlatDelivery)  => { 
+                   console.error(errorPlatDelivery);                   
+                }
+              });
             },
             error: (error) => {
               console.error(error);

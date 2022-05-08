@@ -37,7 +37,7 @@
                                         <td >{{ livraison.idDeliverer }}</td>
                                         <td >{{ changeStatusInFrench(livraison.status) }}</td>
                                         <td>
-                                            <a *ngIf="delivererRole" (click)="getById(livraison._id, livraison.idLivraison)" (click)="openUpdateModal()" class="btn btn-outline-warning">Edit</a>
+                                            <a *ngIf="delivererRole" (click)="getById(livraison)" (click)="openUpdateModal()" class="btn btn-outline-warning">Edit</a>
                                             <input (click)="delete(livraison._id)" type="button" name="btnDelete" id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
                                         </td>
                                     </ng-template>                                    
@@ -62,23 +62,15 @@
         </div>
         <form [formGroup]="updateForm">
 
-            <!-- Deliverer name input -->
+            <!-- Delivery status input -->
             <div class="modal-body">
-                <label class="form-label" for="name">Nom de livreur</label>
-                <!-- <input formControlName="idDeliverer" type="text" id="name" class="form-control" /> -->
+                <label class="form-label" for="name">Etats de la livraison</label>
                 <ng-select formControlName="status" class="idDeliverer">
                     <ng-option *ngFor="let stat of status" [value]="stat.name">
                             {{stat.nameFr}}
                     </ng-option>
                  </ng-select>
             </div>
-
-            <!-- Deliverer name input
-            <div class="modal-body">
-                 <input formControlName="idDeliverer" type="text" id="name" class="form-control" /> 
-                <input type="checkbox" name="" id="" value="doing">
-                <label class="form-label" for="name"> Fait</label>
-            </div> -->
 
             <!-- Submit button /or cancel -->
             <div class="modal-footer">            
