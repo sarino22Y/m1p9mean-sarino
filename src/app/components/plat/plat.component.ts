@@ -59,6 +59,21 @@ export class PlatComponent implements OnInit {
   }
 
   /**
+   * Traduire en fraçais le status
+   * @param status 
+   * @returns 
+   */
+  changeStatusInFrench(status: string): any {
+    if (status == "sell") {
+      return "Vendre";
+    }
+
+    if (status == "sold") {
+      return "Vendu";
+    }
+  }
+
+  /**
    * Id de l'utilisateur connecté.
    */
   getIdCurrentUser() {
@@ -95,7 +110,8 @@ export class PlatComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required])
+      price: new FormControl('', [Validators.required]),
+      expense: new FormControl('', [Validators.required])
     });
   }
 
@@ -106,7 +122,8 @@ export class PlatComponent implements OnInit {
     this.updateForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required])
+      price: new FormControl('', [Validators.required]),
+      expense: new FormControl('', [Validators.required])
     });
   }
 
@@ -157,7 +174,8 @@ export class PlatComponent implements OnInit {
       this.updateForm = this.formBuilder.group({
         name: this.formBuilder.control(res[0].name),
         number: this.formBuilder.control(res[0].number),
-        price: this.formBuilder.control(res[0].price)
+        price: this.formBuilder.control(res[0].price),
+        expense: this.formBuilder.control(res[0].expense)
         });
 
       this.idPlatById = res[0]._id;
