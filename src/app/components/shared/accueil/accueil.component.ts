@@ -146,9 +146,10 @@ export class AccueilComponent implements OnInit {
             console.log("DATA COMMANDE --------------------",data);
 
             // Mettre à jour le nombre restant du plats.
-            let number = {
+            let dataPlat = {
               numberSold: (data["commandes"].number),
               numberRemain: (this.platNumber - data["commandes"].number),
+              status: "sold"
             };
 
             this.platListeService.update(this.idPlat, number).subscribe({
