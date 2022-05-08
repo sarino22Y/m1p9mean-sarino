@@ -15,6 +15,7 @@ export class RestaurantdashboardComponent implements OnInit {
   nbrplats: any;
   nbrplatsSold: any;
   profit: any;
+  totalProfit: any;
 
   constructor(
     private platService: PlatService,
@@ -25,6 +26,7 @@ export class RestaurantdashboardComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'Tableau de board';
     this.getListePlats();
+    this.getPlatSold();
   }
 
   /**
@@ -65,9 +67,56 @@ export class RestaurantdashboardComponent implements OnInit {
           console.log("Plat resultSoldPerRestaurant ty", resultSoldPerRestaurant);
           console.log("platsSold ty", platsSold);
           
-          this.nbrplatsSold = resultSoldPerRestaurant.length;
+          // this.nbrplatsSold = resultSoldPerRestaurant.length;
         })
       });
     }
+  
+   /**
+   * Liste des plats vendus.
+   */
+  getPlatSold() {
+    this.platService.getPlatLivraisons().subscribe(res => {
+      let plats = res['platlivraisons'];      
+        this.platService.getAll().subscribe(resPlats => {
+          this.livraisonService.getAll().subscribe(resLivraison => {
+            var platlivraisonsMap: any = [];
+            var livraisonsMap: any = [];
+
+            let resultPlat = resPlats['plats'];
+            resultPlat.forEach((plat: any) => {
+              platlivraisonsMap[plat._id] = plat;
+            });
+
+            let resultLivraison = resLivraison['livraisons'];
+            resultLivraison.forEach((livraison: any) => {
+              livraisonsMap[livraison._id] = livraison;
+            });            
+            
+            let platLivraison = plats.map((platLivraison: any) => {
+              return {
+                platLivraison: platLivraison,
+                plat: platlivraisonsMap[platLivraison.idPlat],
+                livraison: livraisonsMap[platLivraison.idDelivery]
+              };
+            });
+
+            
+            let arrProfit: any = [];
+            let arrNumberSold: any = [];
+            for (let i = 0; i < platLivraison.length; i++) {
+              if ( platLivraison[i].plat.idRestaurant == this.userService.idOfUserConnected()) {
+                arrProfit.push(platLivraison[i].plat.profit * platLivraison[i].livraison.number);
+                arrNumberSold.push(platLivraison[i].livraison.number);
+              }
+              
+            }
+            
+            this.totalProfit = arrProfit.reduce((a:any, b:any) => a + b, 0);
+            this.nbrplatsSold =  arrNumberSold.reduce((a:any, b:any) => a + b, 0);
+        });
+      });
+    }); 
+  }
 
 }
