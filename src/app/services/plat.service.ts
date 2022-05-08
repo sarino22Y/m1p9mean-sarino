@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http'
 import { catchError, Observable, Subject, throwError } from 'rxjs'
 
 import { environment } from 'src/environments/environment';
+import { LivraisonService } from './livraison.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,11 @@ export class PlatService {
   
   private updatePlat = new Subject<void>();
 
-  constructor( private http: HttpClient) { }
+  constructor( 
+    private http: HttpClient,
+    private livraisonService: LivraisonService,
+    private userService: UserService
+    ) { }
 
   get updateThePlats(){
     return this.updatePlat;
@@ -26,7 +32,7 @@ export class PlatService {
    */
   getAll(): Observable<any>
   {
-    return this.http.get(this.apiUrl + '/plats')
+    return this.http.get(this.apiUrl + '/plats');
   }
 
   /**
@@ -48,7 +54,10 @@ export class PlatService {
    * @returns HttpClient
    */
   create(data:any) {
-    return this.http.post(this.apiUrl + '/addplat/', data) ;
+    return this.http.post(this.apiUrl + '/addplat/', data)
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
 
   /**
@@ -76,6 +85,43 @@ export class PlatService {
   }
 
   /**
+   * Obtenir la liste des plats vendus.
+   * @param
+   * @returns 
+   */
+  getPlatLivraisons(): Observable<any> {
+    return this.http.get(this.apiUrl + '/assplatlivraisons')
+  }
+
+  /**
+   * Créer le plat vendu :
+   * Association entre le plat et la livraison,
+   * qui stocke l'id du plat, bénéfice et status,
+   * aussi l'id de livraison, date de livraison (DateSoldPlat)
+   * @param  
+   * @returns 
+   */
+  createPlatDelivery(data: any) {
+    return this.http.post(this.apiUrl + '/addassplatlivraisons/', data)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  /**
+   * Supprimer un plat.
+   * @param id 
+   * @returns 
+   */
+  deletePlatDelivery(id:any) 
+   {
+      return this.http.delete(this.apiUrl + '/assplatlivraisons/' + id)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+   }
+
+  /**
    * Capture d'erreur.
    * @param error 
    * @returns error
@@ -88,7 +134,6 @@ export class PlatService {
     } else {
       errorMessage = "Erreurr: ${error.status}\nMessage: ${error.message}"
     }
-
     return errorMessage;
   }
 }
