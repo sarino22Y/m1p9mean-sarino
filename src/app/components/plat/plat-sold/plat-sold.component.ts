@@ -11,6 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 export class PlatSoldComponent implements OnInit {
 
   plats: any = [];
+  resultPlat = [];
+  resultLivraison = [];
+  totalProfit: number = 0;
+  platLivraison: any;
   ekalyRole: boolean = true;
   idCurrentUser: any;
 
@@ -20,8 +24,9 @@ export class PlatSoldComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getListePlatSold();
+    
     this.isCurrentRoleEkaly();
     this.getIdCurrentUser();
   }
@@ -48,45 +53,86 @@ export class PlatSoldComponent implements OnInit {
   /**
    * Liste des plats vendus.
    */
-  getListePlatSold(){
-    let platsSold: any = [];
-    let result: any = [];
-    this.livraisonService.getAll().subscribe(res => {
-      this.platService.getAll().subscribe(resplats => {
-        for (let i = 0; i < resplats.plats.length; i++) {
-          for (let j = 0; j < res.livraisons.length; j++) {
-            if (res.livraisons[j].idPlat == resplats.plats[i]._id) {
-              platsSold[j] = resplats.plats[i];
-              platsSold[j].dateLivraison = res.livraisons[j].dateLivraison;
-            }     
-          }
-        }       
-        for (let k = 0; k < platsSold.length; k++) {
-          const element = platsSold[k];
-          if (element) {           
-            this.plats.push(element);
-          }
-        }
-        console.log("Les plats vendus ", this.plats);
-      })
-    });
+  getListePlatSold() {
+    this.platService.getPlatLivraisons().subscribe(res => {
+      this.plats = res['platlivraisons'];      
+        this.platService.getAll().subscribe(resPlats => {
+          this.livraisonService.getAll().subscribe(resLivraison => {
+            var platlivraisonsMap: any = [];
+            var livraisonsMap: any = [];
+
+            this.resultPlat = resPlats['plats'];
+            this.resultPlat.forEach((plat: any,i) => {
+              platlivraisonsMap[plat._id] = plat;
+            });
+
+            this.resultLivraison = resLivraison['livraisons'];
+            this.resultLivraison.forEach((livraison: any,i) => {
+              livraisonsMap[livraison._id] = livraison;
+            });            
+            
+            this.platLivraison = this.plats.map((platLivraison: any) => {
+              return {
+                platLivraison: platLivraison,
+                plat: platlivraisonsMap[platLivraison.idPlat],
+                livraison: livraisonsMap[platLivraison.idDelivery]
+              };
+            });
+
+            
+            let arrProfit: any = [];
+            for (let i = 0; i < this.platLivraison.length; i++) {
+              if ( this.platLivraison[i].plat.idRestaurant == this.getIdCurrentUser()) {
+                arrProfit.push(this.platLivraison[i].plat.profit * this.platLivraison[i].livraison.number);
+               }
+              
+            }
+            this.totalProfit = arrProfit.reduce((a:any, b:any) => a + b, 0);
+            console.log("plat livraison", arrProfit.reduce((a:any, b:any) => a + b, 0));
+        });
+      });
+    }); 
   }
+  
+  /**
+   * Liste des plats vendus.
+   */
+  // getListePlatSold(){
+  //   let platsSold: any = [];
+  //   let result: any = [];
+  //   this.livraisonService.getAll().subscribe(res => {
+  //     this.platService.getAll().subscribe(resplats => {
+  //       for (let i = 0; i < resplats.plats.length; i++) {
+  //         for (let j = 0; j < res.livraisons.length; j++) {
+  //           if (res.livraisons[j].idPlat == resplats.plats[i]._id) {
+  //             platsSold[j] = resplats.plats[i];
+  //             platsSold[j].dateLivraison = res.livraisons[j].dateLivraison;
+  //           }     
+  //         }
+  //       }       
+  //       for (let k = 0; k < platsSold.length; k++) {
+  //         const element = platsSold[k];
+  //         if (element) {           
+  //           this.plats.push(element);
+  //         }
+  //       }
+  //       console.log("Les plats vendus ", this.plats);
+  //     })
+  //   });
+  // }
 
    /**
     * Supprimer un plat.
     */
-    async delete(idPlat:any) {    
+    async delete(idPlat:any) {
       let name: string;
-      this.platService.getPlatById( idPlat ).subscribe( res => {
-        name = res[0].name;
-        console.log("RESULTAT", res);
         
-        if (confirm("Supprimer : " + name)) {
-          this.platService.delete(idPlat)
+        if (confirm("Supprimer")) {
+          this.platService.deletePlatDelivery(idPlat)
              .subscribe({ 
                 next: ( data ) => {
-                window.location.href= "/platliste";
-                console.log("DATA-----",data);
+                  window.location.href= "/platliste/sold";
+                  console.log("DATA-----",data);
              },
              error: (e) => {
                 alert("Une erreur s'est produite. Veuillez réessayer plus tard.")
@@ -94,7 +140,6 @@ export class PlatSoldComponent implements OnInit {
              }
            })
           alert("OK, mais pas effectué pour l'instant")
-         }
-       });    
+         } 
     }
 }

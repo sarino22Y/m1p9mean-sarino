@@ -20,25 +20,28 @@
                         <div class="col-md-11">
                             <table class="table table-bordered table-sm">
                                 <thead class="thead-light">
-                                    <th>Name</th>
-                                    <th>Nombres vendu</th>
-                                    <th>Date</th>
+                                    <th>Plat</th>
+                                    <th>Nombre</th>
+                                    <th>Bénéfice</th>
+                                    <th>Date du vendu</th>
                                     <!-- <th>Prix unitaire</th> -->
                                     <th></th>
                                 </thead>
-                                <tbody *ngFor="let plat of plats">
-                                    <ng-template [ngIf]="plat.idRestaurant == idCurrentUser || ekalyRole " >
-                                        <td >{{ plat.name }}</td>
-                                        <td >{{ plat.numberSold }}</td>
-                                        <td >{{ plat.dateLivraison }}</td>
+                                <tbody *ngFor="let plat of platLivraison">
+                                    <ng-template [ngIf]="plat.plat.idRestaurant == idCurrentUser || ekalyRole" >
+                                        <td >{{ plat.plat.name }}</td>
+                                        <td >{{ plat.livraison.number }}</td>
+                                        <td >{{ (plat.plat.profit * plat.livraison.number)}}</td>
+                                        <td >{{ plat.platLivraison.dateSold }}</td>
                                         <!-- <td >{{ plat.price }}</td> -->
                                         <td>
-                                            <input (click)="delete(plat._id)" [routerLink]="['/platliste']" type="button" name="btnDelete"  id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
+                                            <input (click)="delete(plat.platLivraison._id)" type="button" name="btnDelete"  id="btnDelete" value="Supprimer" class="btn btn-outline-danger">
                                         </td>
                                     </ng-template>
                                 </tbody>
                             </table>
                         </div>
+                        <span>Bénéfice total :  <strong> {{ totalProfit }} Ariary</strong></span>
                     </div>
                 </div>
             </div>
