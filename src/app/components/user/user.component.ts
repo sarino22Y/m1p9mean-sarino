@@ -42,6 +42,7 @@ export class UserComponent implements OnInit {
     }
 
   async ngOnInit() {
+    this.userService.spinner();
     let resultRoute = this.route.split("/");
     this.result = (resultRoute[2].toString() ? resultRoute[2].toString() : null);
 

@@ -31,15 +31,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.title = "Se connecter"
     this.createForm();
-    this.ngxService.start(); // start foreground spinner of the master loader with 'default' taskId
-    // Stop the foreground loading after 5s
-    setTimeout(() => {
-      this.ngxService.stop(); // stop foreground spinner of the master loader with 'default' taskId
-    }, 5000);
-
+    this.userService.spinner();
   }
 
-
+  /**
+   * Form pour le login.
+   */
   createForm() {
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
@@ -69,7 +66,7 @@ export class LoginComponent implements OnInit {
     }
     this.model = this.loginForm.value;
     console.log("MODEL-------", this.model);
-    
+    this.ngxService.start();
     this.userService.login(this.model)
     .subscribe({
       next: ( data:any ) => {
@@ -79,9 +76,11 @@ export class LoginComponent implements OnInit {
 
         this.curentRole = this.userService.roleOfUserConnected();
         this.route.navigate([this.curentRole + '/dashboard']);
+        this.ngxService.stop()
       },
       error: (e) => {
         console.error("EREURRR",e);
+        this.ngxService.stop();
       }
     })
   }

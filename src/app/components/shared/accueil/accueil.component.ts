@@ -65,6 +65,7 @@ export class AccueilComponent implements OnInit {
       this.createForm();       
     });    
     this.createForm();
+    this.userService.spinner();
   }
 
   // Modals Commande :

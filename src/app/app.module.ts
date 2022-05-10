@@ -53,8 +53,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
   pbThickness: 5, // progress bar thickness
   text: "Chargement...",
-  maxTime: 5,
-  minTime:1
+  maxTime: 6,
+  minTime:4
 };
 @NgModule({
   declarations: [

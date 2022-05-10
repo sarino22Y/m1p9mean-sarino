@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { catchError, Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -26,7 +27,21 @@ export class UserService {
     return this.updateMenu;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private ngxService: NgxUiLoaderService
+    ) { }
+
+  /**
+   * Methode pour le chargement de page.
+   */
+  spinner() {
+    this.ngxService.start(); // start spinner.
+    // Stop spinner en chargement après 5s.
+    setTimeout(() => {
+      this.ngxService.stop(); // stop spinner.
+    }, 5000);
+  }
 
   /**
    * Methode pour s'enregistrer pour tout.

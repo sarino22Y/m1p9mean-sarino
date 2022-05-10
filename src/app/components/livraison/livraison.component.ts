@@ -44,6 +44,7 @@ export class LivraisonComponent implements OnInit {
     });  
     this. editForm();
     this.idUser();
+    this.userService.spinner();
   }
 
   /**
