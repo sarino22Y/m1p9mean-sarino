@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from "ngx-ui-loader";
 import { Router } from '@angular/router';
 import { IUsers } from 'src/app/models/iusers';
 import { UserService } from 'src/app/services/user.service';
@@ -16,11 +17,13 @@ export class LoginComponent implements OnInit {
   title!: string;
   responseData: any;
   curentRole: any;
+  timer: any = "timer"
   
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private userService: UserService
+    private userService: UserService,
+    private ngxService: NgxUiLoaderService
     ) { 
       localStorage.clear();
     }
@@ -28,6 +31,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.title = "Se connecter"
     this.createForm();
+    this.ngxService.start(); // start foreground spinner of the master loader with 'default' taskId
+    // Stop the foreground loading after 5s
+    setTimeout(() => {
+      this.ngxService.stop(); // stop foreground spinner of the master loader with 'default' taskId
+    }, 5000);
+
   }
 
 
