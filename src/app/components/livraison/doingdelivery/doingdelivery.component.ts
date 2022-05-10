@@ -21,8 +21,9 @@ export class DoingdeliveryComponent implements OnInit {
   dateSoldPlat: any;
   profitPlat: number = 0;
   livraisons: any;
+  finallLivraisons: any;
   plats: any;
-  status: any;
+  users: any;
   deliverers: any;
   modelLivraisonInfo!: IDeliveryInfo;
   ekalyRole: boolean = true;
@@ -49,11 +50,8 @@ export class DoingdeliveryComponent implements OnInit {
     this.livraisonService.updateTheLivraison.subscribe(res => {
       this.editForm();       
     });  
-    this. editForm();
+    this.editForm();
     this.idUser();
-    
-    console.log("ID USER CONNECTED", this.idUser());
-    this.statusLivraisonByDeliverer();
   }
 
   /**
@@ -120,16 +118,6 @@ export class DoingdeliveryComponent implements OnInit {
     }
   }
 
-  /**
-   * Statu pour la liste deroulante pendant
-   * la mise à jour de livraison par son livreur.
-   * @returns 
-   */
-  statusLivraisonByDeliverer() {
-    let stat:any;
-    stat = {status:[{name: "done", nameFr: "Fait"}]};
-    this.status = stat['status'];
-  }
 
   // Id d'utilisateur connecté.
   idUser():any{
@@ -169,10 +157,6 @@ export class DoingdeliveryComponent implements OnInit {
         }        
       }
       this.deliverers = objUser;
-      // console.log("LIVREURS ", this.deliverers);
-
-      // console.log("USERS ", res['users']);    
-      
     })
   }
 
@@ -183,6 +167,22 @@ export class DoingdeliveryComponent implements OnInit {
   {
     await this.livraisonService.getAllinfo().subscribe( res => {
       this.livraisons = res['livraisoninfos'];
+      this.userService.getAll().subscribe( resUser => {
+        this.users = resUser['users'];
+
+        var userMap: any = [];
+
+        this.users.forEach((user: any) => {
+          userMap[user._id] = user;
+        });
+        
+        this.finallLivraisons = this.livraisons.map((livraison: any) => {
+          return {
+            livraison: livraison,
+            user: userMap[livraison.idDeliverer]
+          };
+        });
+      })
     });
   }
 
@@ -190,22 +190,15 @@ export class DoingdeliveryComponent implements OnInit {
    * Obtenir l'information de livraison
    */
   getById(livraison: any) {
-     console.log(livraison);
-     
-    this.idLivraisonInfo = livraison._id;
-    this.idLivraison = livraison.idLivraison;
-    this.dateSoldPlat = livraison.dateLivraison;
-
-    console.log("ID LIVRAISON", this.idLivraison);
-    
-    
+    this.idLivraisonInfo = livraison.livraison._id;
+    this.idLivraison = livraison.livraison.idLivraison;
+    this.dateSoldPlat = livraison.livraison.dateLivraison;
     this.getLivraisonById();
   }
 
   getLivraisonById() {
     this.livraisonService.getOne(this.idLivraison).subscribe( res => {
       this.idPlat = res[0].idPlat;
-      console.log("RESULTAT ID PLAT", this.idPlat);
 
       // TODO: profit = soldPrice - expense (Dépense)
       this.platService.getPlatById(this.idPlat).subscribe( resPlat =>{
@@ -223,8 +216,7 @@ export class DoingdeliveryComponent implements OnInit {
       profit: this.profitPlat,
       dateSold: this.dateSoldPlat
     };
-    console.log("Ass plat livraison", dataPlatLivraison);
-    
+    console.log("Succés", this.modelLivraisonInfo);
     if(confirm("La livraison est terminée." )) {
       this.livraisonService.updateInfo(this.idLivraisonInfo, this.modelLivraisonInfo)
       .subscribe({
