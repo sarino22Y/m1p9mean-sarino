@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from '@angular/common/http';
 
 import { PlatRoutingModule } from './routes/plat-routing.module';
@@ -9,6 +10,7 @@ import { AppRoutingModule } from './routes/app-routing.module';
 import { CommandeRoutingModule } from './routes/commande-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION, } from "ngx-ui-loader";
 
 import { AppComponent } from './app.component';
 import { PlatComponent } from './components/plat/plat.component';
@@ -41,6 +43,19 @@ import { DoingdeliveryComponent } from './components/livraison/doingdelivery/doi
 import { DonedeliveryComponent } from './components/livraison/donedelivery/donedelivery.component';
 import { PlatRemainsComponent } from './components/plat/plat-remains/plat-remains.component';
 import { PlatSoldComponent } from './components/plat/plat-sold/plat-sold.component';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: "red",
+  bgsPosition: POSITION.bottomCenter,
+  bgsSize: 40,
+  bgsType: SPINNER.threeBounce, // background spinner type
+  fgsType: SPINNER.threeStrings, // foreground spinner type
+  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+  pbThickness: 5, // progress bar thickness
+  text: "Chargement...",
+  maxTime: 6,
+  minTime:4
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +88,7 @@ import { PlatSoldComponent } from './components/plat/plat-sold/plat-sold.compone
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AccueilRoutingModule,   
     ReactiveFormsModule,
     NgSelectModule,
@@ -84,10 +100,12 @@ import { PlatSoldComponent } from './components/plat/plat-sold/plat-sold.compone
     CommandeRoutingModule,
     LivraisonRoutingModule,
     DashboardRoutingModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   exports:[AppComponent],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

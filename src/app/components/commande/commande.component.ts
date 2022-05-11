@@ -36,6 +36,7 @@ export class CommandeComponent implements OnInit {
     }
 
   async ngOnInit() {
+    this.userService.spinner();
     await this.getListeCommande();
     this.infoUser();
     this.userService.updateTheMenu.subscribe(res => {

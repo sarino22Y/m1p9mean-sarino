@@ -34,6 +34,7 @@ export class DonedeliveryComponent implements OnInit {
     this.getListeDeliverer();
     this.isCurrentRoleEkaly();
     this.idUser();
+    this.userService.spinner();
   }
 
 

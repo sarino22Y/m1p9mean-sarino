@@ -6,6 +6,7 @@ import { catchError, Observable, Subject, throwError } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { LivraisonService } from './livraison.service';
 import { UserService } from './user.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class PlatService {
   constructor( 
     private http: HttpClient,
     private livraisonService: LivraisonService,
-    private userService: UserService
+    private userService: UserService,
+    private ngxService: NgxUiLoaderService
     ) { }
 
   get updateThePlats(){
@@ -136,4 +138,15 @@ export class PlatService {
     }
     return errorMessage;
   }
+
+   /**
+   * Methode pour le chargement de page.
+   */
+    spinner() {
+      this.ngxService.start(); // start spinner.
+      // Stop spinner en chargement après 5s.
+      setTimeout(() => {
+        this.ngxService.stop(); // stop spinner.
+      }, 5000);
+    }
 }

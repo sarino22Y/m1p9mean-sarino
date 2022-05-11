@@ -25,8 +25,8 @@ export class PlatSoldComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.getListePlatSold();
-    
+    this.userService.spinner();
+    this.getListePlatSold();    
     this.isCurrentRoleEkaly();
     this.getIdCurrentUser();
   }

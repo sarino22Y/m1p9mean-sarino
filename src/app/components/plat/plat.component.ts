@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { IPlats } from 'src/app/models/iplats';
 import { PlatService } from 'src/app/services/plat.service';
 import { UserService } from 'src/app/services/user.service';
@@ -27,10 +28,12 @@ export class PlatComponent implements OnInit {
   constructor(
     private platService:PlatService,
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private ngxService: NgxUiLoaderService
     ) { }
 
   async ngOnInit() {
+    this.userService.spinner();
     await this.getListePlat();
     
     this.updateModal = new window.bootstrap.Modal(
@@ -159,8 +162,10 @@ export class PlatComponent implements OnInit {
    * Liste des plats.
    */
   async getListePlat() {
+    await this.ngxService.start();
     await this.platService.getAll().subscribe( res => {
       this.plats = res['plats'];
+      this.ngxService.stop();
     });
   }
 

@@ -20,6 +20,7 @@ export class LivraisoninfoComponent implements OnInit {
     ) { }
 
   async ngOnInit() {
+    this.userService.spinner();
     await this.getListeLivraison();
     this.isCurrentRoleEkaly();
   }
