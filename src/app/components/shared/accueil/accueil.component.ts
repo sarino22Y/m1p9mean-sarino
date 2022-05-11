@@ -65,7 +65,6 @@ export class AccueilComponent implements OnInit {
       this.createForm();       
     });    
     this.createForm();
-    this.userService.spinner();
   }
 
   // Modals Commande :
@@ -100,6 +99,8 @@ export class AccueilComponent implements OnInit {
         this.namePlat = res[0].name;
         this.platNumber = res[0].numberRemain;
         console.log("Nombre de plat est ", res[0].numberRemain);
+        console.log("this.namePlat ", this.namePlat);
+        console.log("id de plat est ", this.idPlat);
         
       });
     }
@@ -133,11 +134,11 @@ export class AccueilComponent implements OnInit {
       this.model["idClient"] = this.idUser();
       this.model["adressClient"] = this.adressClientC;
       this.model["emailClient"] = this.mailClientC;
-      let number = {
+      let infoNumber = {
         numberSold: (this.model.number),
         numberRemain: (this.platNumber - this.model.number),
       };
-      console.log("MODEL TY", number);
+      console.log("MODEL TY", infoNumber);
       if (confirm("Confirmer la commande")) { 
         this.commandeService.create(this.model)
         .subscribe({
@@ -149,13 +150,12 @@ export class AccueilComponent implements OnInit {
             // Mettre à jour le nombre restant du plats.
             let dataPlat = {
               numberSold: (data["commandes"].number),
-              numberRemain: (this.platNumber - data["commandes"].number),
-              status: "sold"
+              numberRemain: (this.platNumber - data["commandes"].number)
             };
 
-            this.platListeService.update(this.idPlat, number).subscribe({
-              next: (dataPlat: any) => {
-                console.log("DATA PLATS------------ ", dataPlat);
+            this.platListeService.update(this.idPlat, dataPlat).subscribe({
+              next: (dataPlatres: any) => {
+                console.log("DATA PLATS------------ ", dataPlatres);
               },
               error: (errPlat) => {
                 console.error("ERREUR MISE A JOUR NOMBRE DE PLAT ", errPlat);                
@@ -188,7 +188,7 @@ export class AccueilComponent implements OnInit {
                 this.deliveryService.createDeliveryInfo(this.modelDeliveryInfo).subscribe({
                   next: (dataDeliveryinfo) => {
                     console.log("DATA INFORMATION LIVRAISON AFTER SUCCES------------ ", dataDeliveryinfo);
-                    window.location.href= "commandeliste";
+                    //window.location.href= "commandeliste";
                   },
                   error: (err) => {
                     console.error("ERREUR INFORMATION LIVRAISON ",err);                
